@@ -5,3 +5,22 @@ body {
 h1 {
     text-align: center;
 }
+
+div.main-box {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    border: 0.1em solid purple;
+    width: 66%;
+}
+
+div.item {
+    display: flex;
+    border: 0.1em solid green;
+    margin: 0.3em;
+    width: 100%;
+}
+
+.navigation-bar {
+    background-color: white;
+}
