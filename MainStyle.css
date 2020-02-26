@@ -58,13 +58,20 @@ div.item p {
     width: 100%;
     padding: 0;
     margin: 0;
-    border-bottom: 0.1em solid #c7493a;
+
+    justify-content: space-between;
 }
 
 .navigation-bar a {
     color: #c7493a;
     border: 0.1em solid #c7493a;
     padding: 1em;
+}
+
+.navigation-bar input[type=text]{
+    background-color: rgba(204, 204, 204, .3);
+    border: 1px solid #636363;
+    width: 35%;
 }
 /*Dropdown Starts*/
 .dropbtn {
