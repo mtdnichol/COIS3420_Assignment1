@@ -60,9 +60,23 @@ body {
     color: #a0cdf1;
 }
 
+a.inline {
+    color: #c7493a;
+}
+
+a.inline:hover {
+    color: #c7493a;
+    text-decoration: underline;
+}
+
+a.inline:visited {
+    color: #c7493a;
+    text-decoration: none;
+}
+
 form {
     display: block;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 form div, fieldset, form button {
@@ -75,6 +89,7 @@ form input {
     outline: 0;
     background: transparent;
     border-bottom: 1px solid #171717;
+    margin: 1em;
 }
 
 button.centered {
@@ -82,7 +97,9 @@ button.centered {
     margin-left: auto;
     margin-right: auto;
     background-color: #c7493a;
-    padding: 0.5em;
+    padding: .8em;
+    border-radius: 0.3em;
+    border: none;
 }
 
 div.main-box {
