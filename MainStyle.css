@@ -62,16 +62,23 @@ div.item p {
     justify-content: space-between;
 }
 
+
 .navigation-bar a {
     color: #c7493a;
     border: 0.1em solid #c7493a;
     padding: 1em;
+    cursor: pointer;
 }
 
 .navigation-bar input[type=text]{
     background-color: rgba(204, 204, 204, .3);
     border: 1px solid #636363;
     width: 35%;
+}
+
+.navigation-bar input[type=text]::placeholder {
+    text-align: center;
+    font-size: 1em;
 }
 /*Dropdown Starts*/
 .dropbtn {
