@@ -48,6 +48,20 @@ body {
     color: #a0cdf1;
 }
 
+form {
+    display: block;
+}
+
+form div, fieldset, form button {
+    display: block;
+    margin: 0.5em 0.3em;
+}
+
+button.centered {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 div.main-box {
     display: flex;
     flex-direction: column;
