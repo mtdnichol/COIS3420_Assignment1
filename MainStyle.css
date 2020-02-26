@@ -89,6 +89,7 @@ body {
     display: flex;
     font-size: 1.1em;
     cursor: pointer;
+    background: none;
 }
 
 .bucket-list-nav button:hover {
