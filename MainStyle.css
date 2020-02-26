@@ -62,6 +62,44 @@ div.item p {
     border: 0.1em solid #c7493a;
     padding: 1em;
 }
+/*Dropdown Starts*/
+.dropbtn {
+    background-color: #c7493a;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #c7493a; /*Colour of the dropdown buttons*/
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #c7493a; /*Colour of the 'My Bucket Lists' buttons*/
+}
+/*Dropdown Ends*/
 
 .justifyRight {
     justify-content: flex-end;
