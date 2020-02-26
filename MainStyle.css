@@ -62,6 +62,7 @@ body {
 
 form {
     display: block;
+    font-size: 2em;
 }
 
 form div, fieldset, form button {
@@ -69,9 +70,19 @@ form div, fieldset, form button {
     margin: 0.5em 0.3em;
 }
 
+form input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid #171717;
+}
+
 button.centered {
+    color: white;
     margin-left: auto;
     margin-right: auto;
+    background-color: #c7493a;
+    padding: 0.5em;
 }
 
 div.main-box {
