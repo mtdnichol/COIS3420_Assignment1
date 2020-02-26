@@ -17,10 +17,9 @@
                 <a href="DisplayList.html">List 3</a>
             </div>
         </div>
+        <input type="text" placeholder="&#xF002;    Search..." style="font-family:'Roboto', FontAwesome,serif">
 
-        <input type="text" placeholder="Search...">
-
-        <div>
+        <div class="user-buttons">
             <a href="Login.html">Login</a>
             <a>Profile</a>
         </div>
@@ -32,17 +31,17 @@
         <form id="main-form" action="./processvote.php" method="post">
             <div>
                 <label for="email"><i class="fas fa-envelope"></i></label>
-                <input id="email" name="email" type="text" placeholder="email">
+                <input id="email" name="email" type="text" placeholder="E-mail">
             </div>
             <div>
                 <label for="password"><i class="fas fa-lock"></i></label>
-                <input id="password" name="password" type="text" placeholder="password">
+                <input id="password" name="password" type="text" placeholder="Password">
             </div>
 
             <button id="submit" name="submit" class="centered">Login</button>
         </form>
 
-        <a href="Register.html">Register</a>
+        <p>Don't have an account?  <a href="Register.html" class="inline">Register</a> instead.</p>
     </div>
 </body>
 </html>

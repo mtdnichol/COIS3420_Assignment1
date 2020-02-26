@@ -8,6 +8,42 @@
     <script src="https://kit.fontawesome.com/1c8ee6a0f5.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="navigation-bar">
+        <div class="dropdown">
+            <button class="dropbtn">My Bucket Lists</button>
+            <div class="dropdown-content">
+                <a href="DisplayList.html">List 1</a>
+                <a href="DisplayList.html">List 2</a>
+                <a href="DisplayList.html">List 3</a>
+            </div>
+        </div>
+        <input type="text" placeholder="&#xF002;    Search..." style="font-family:'Roboto', FontAwesome,serif">
 
+        <div class="user-buttons">
+            <a href="Login.html">Login</a>
+            <a>Profile</a>
+        </div>
+    </div>
+
+    <div class="main-box">
+        <h1><i class="fas fa-clipboard-list"></i> Register</h1>
+
+        <form id="main-form" action="./processvote.php" method="post">
+            <div>
+                <label for="email"><i class="fas fa-envelope"></i></label>
+                <input id="email" name="email" type="text" placeholder="E-mail">
+            </div>
+            <div>
+                <label for="password"><i class="fas fa-lock"></i></label>
+                <input id="password" name="password" type="text" placeholder="Password">
+            </div>
+            <div>
+                <label for="password-check"><i class="fas fa-lock"></i></label>
+                <input id="password-check" name="password-check" type="text" placeholder="Re-type Password">
+            </div>
+
+            <button id="submit" name="submit" class="centered">Register</button>
+        </form>
+    </div>
 </body>
 </html>
