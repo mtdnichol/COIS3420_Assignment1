@@ -1,8 +1,20 @@
+html {
+    box-sizing: border-box;
+}
+
 body {
     background-color: rgba(225, 233, 237, 0.31);
     color: #171717;
     margin: 0;
     font-family: 'Roboto', 'sans-serif';
+}
+
+.user-buttons {
+    display: flex;
+}
+
+.user-buttons a {
+    margin: 0 5px 0 5px;
 }
 
 .main-box h1 {
@@ -83,32 +95,61 @@ div.item {
 div.item h3 {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    /*font-size: 1.3em;*/
 }
 
 div.item p {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    /*font-size: 1.1em;*/
 }
 
 .navigation-bar {
     display: flex;
     width: 100%;
     padding: 0;
-    margin: 0;
+    margin: 7px 0 0;
+    min-height: 30%;
 
+    align-items: center;
     justify-content: space-between;
 }
 
-.navigation-bar a {
-    color: #c7493a;
-    border: 0.1em solid #c7493a;
-    padding: 1em;
+.userButtons {
+    display: flex;
 }
 
+.navigation-bar a {
+    background-color: #c7493a;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+/* SEARCH BAR */
 .navigation-bar input[type=text]{
-    background-color: rgba(204, 204, 204, .3);
-    border: 1px solid #636363;
+    background-color: rgba(238, 238, 238, 0.8);
     width: 35%;
+    border: 0;
+
+    border-bottom: 1px solid #b3b3b3;
+    font-size: 1.2em;
+    border-radius: 7px;
+
+    align-self: normal;
+}
+
+.navigation-bar input[type=text]:focus {
+
+}
+
+.navigation-bar input[type=text]::placeholder {
+    text-align: center;
+    font-size: 1.2em;
+    color: #b3b3b3;
 }
 /*Dropdown Starts*/
 .dropbtn {
@@ -121,8 +162,8 @@ div.item p {
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+    display: flex;
+    margin: 0 5px 0 5px;
 }
 
 .dropdown-content {
