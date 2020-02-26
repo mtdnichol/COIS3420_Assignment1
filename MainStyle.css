@@ -94,14 +94,19 @@ div.item p {
 }
 
 .navigation-bar input[type=text]{
-    background-color: rgba(204, 204, 204, .3);
-    border: 1px solid #636363;
+    background-color: rgba(238, 238, 238, 0.8);
     width: 35%;
+    border: 0;
+
+    border-bottom: 1px solid #b3b3b3;
+
+
 }
 
 .navigation-bar input[type=text]::placeholder {
     text-align: center;
     font-size: 1em;
+    color: #b3b3b3;
 }
 /*Dropdown Starts*/
 .dropbtn {
