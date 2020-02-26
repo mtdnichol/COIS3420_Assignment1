@@ -207,13 +207,13 @@ div.item p {
 
     border-bottom: 1px solid #b3b3b3;
     font-size: 1.2em;
-    border-radius: 7px;
+    border-radius: 15px;
 
     align-self: normal;
 }
 
 .navigation-bar input[type=text]:focus {
-
+    outline: none;
 }
 
 .navigation-bar input[type=text]::placeholder {
