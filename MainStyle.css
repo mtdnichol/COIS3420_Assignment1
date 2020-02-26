@@ -9,6 +9,14 @@ body {
     font-family: 'Roboto', 'sans-serif';
 }
 
+#tooltip {
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
 .user-buttons {
     display: flex;
 }
@@ -43,31 +51,66 @@ body {
 .bucket-list-nav {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
     width: 95%;
     margin: 0 auto;
+    font-size: 1.1em;
+}
+
+.right {
+    margin-left: auto;
 }
 
 .bucket-list-nav button {
     color: #80add1;
     border: 2px solid #b3b3b3;
     padding: 5px;
+    margin: 0 2px 0 2px;
     border-radius: 5px;
+    display: flex;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.bucket-list-nav button:hover {
+    color: #a0cdf1;
 }
 
 .bucket-list-nav a {
     text-decoration: none;
-    margin-left: auto;
     color: #80add1;
     border: 2px solid #b3b3b3;
     padding: 5px;
     border-radius: 5px;
 }
 
+.bucket-list-nav .exit-buttons {
+    margin-left: auto;
+}
+
 .bucket-list-nav a:hover {
     color: #a0cdf1;
 }
 
+.item-buttons {
+    margin-left: 1%;
+    padding: 0 10px 0 0;
+    flex-direction: column;
+    border-right: 2px solid #b3b3b3;
+}
+
+.item-buttons button {
+    padding: 5px;
+    display: flex;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.0em;
+}
+
+.item-buttons button:hover {
+    color: #b3b3b3;
+}
 a.inline {
     color: #c7493a;
 }
