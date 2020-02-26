@@ -23,6 +23,11 @@ body {
 
 .user-buttons a {
     margin: 0 5px 0 5px;
+    border-radius: 5px;
+}
+
+.user-buttons a:hover {
+    color: #3c3f41;
 }
 
 .main-box h1 {
@@ -112,16 +117,16 @@ body {
     color: #b3b3b3;
 }
 a.inline {
-    color: #c7493a;
+    color: #4c6ef5;
 }
 
 a.inline:hover {
-    color: #c7493a;
+    color: #4c6ef5;
     text-decoration: underline;
 }
 
 a.inline:visited {
-    color: #c7493a;
+    color: #4c6ef5;
     text-decoration: none;
 }
 
@@ -144,13 +149,23 @@ form input {
 }
 
 button.centered {
-    color: white;
+    color: #3c3f41;
     margin-left: auto;
     margin-right: auto;
-    background-color: #c7493a;
+    background-color: white;
     padding: .8em;
     border-radius: 0.3em;
-    border: none;
+    border: 2px solid #4c6ef5;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button.centered:hover {
+    transition: 0.3s;
+    color: white;
+    background-color: #4c6ef5;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 div.main-box {
@@ -183,29 +198,46 @@ div.item p {
     /*font-size: 1.1em;*/
 }
 
+.box2 {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 10px;
+  }
+
 .navigation-bar {
     display: flex;
     width: 100%;
-    padding: 0;
-    margin: 7px 0 0;
+    padding: 7px 0;
     min-height: 30%;
+    background-color: white;
 
     align-items: center;
     justify-content: space-between;
+
+    -webkit-box-shadow: 0px 10px 16px -4px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 10px 16px -4px rgba(0,0,0,0.15);
+    box-shadow: 0px 10px 16px -4px rgba(0,0,0,0.15);
 }
 
 .userButtons {
     display: flex;
 }
 
-.navigation-bar a {
-    background-color: #c7493a;
-    color: white;
+.user-buttons a {
+    /*background-color: #4c6ef5;*/
+    border: 2px solid #4c6ef5;
+    color: #3c3f41;
     padding: 16px;
     font-size: 16px;
-    border: none;
     cursor: pointer;
     margin: 0 5px;
+    transition: 0.3s;
+}
+
+.user-buttons a:hover {
+    background-color: #4c6ef5;
+    color: white;
+    transition: 0.3s;
 }
 
 /* SEARCH BAR */
@@ -213,6 +245,8 @@ div.item p {
     background-color: rgba(238, 238, 238, 0.8);
     width: 35%;
     border: 0;
+    padding: 0px 10px;
+    color: #171717;
 
     border-bottom: 1px solid #b3b3b3;
     font-size: 1.2em;
@@ -232,32 +266,45 @@ div.item p {
 }
 /*Dropdown Starts*/
 .dropbtn {
-    background-color: #c7493a;
-    color: white;
-    padding: 16px;
+    background-color: white;
+    color: #3c3f41;
+    padding: 18px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #4c6ef5;
 }
 
 .dropdown {
     display: flex;
-    margin: 0 5px 0 5px;
+    margin: 0 10px;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #c7493a; /*Colour of the dropdown buttons*/
+    background-color: #4c6ef5; /*Colour of the dropdown buttons*/
     min-width: 160px;
     z-index: 1;
+    border-radius: 5px;
 }
 
 .dropdown-content a {
-    color: white;
+    color: #3c3f41;
+    background-color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    transition: 0.3s;
+    border: 2px solid #4c6ef5;
+    border-radius: 5px;
+}
+
+.dropdown-content a:hover {
+    background-color: #4c6ef5;
+    color: white;
+    transition: 0.3s;
 }
 
 .dropdown:hover .dropdown-content {
@@ -265,7 +312,7 @@ div.item p {
 }
 
 .dropdown:hover .dropbtn {
-    background-color: #c7493a; /*Colour of the 'My Bucket Lists' buttons*/
+    background-color: #4c6ef5; /*Colour of the 'My Bucket Lists' buttons*/
 }
 /*Dropdown Ends*/
 
@@ -279,7 +326,7 @@ div.item p {
 
 .dropdown a:hover {
     color: #3c3f41;
-    background-color: #c7493a;
+    background-color: #4c6ef5;
 }
 
 .dropdown a:active {
