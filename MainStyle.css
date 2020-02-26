@@ -48,8 +48,16 @@ body {
     margin: 0 auto;
 }
 
+.bucket-list-nav button {
+    color: #80add1;
+    border: 2px solid #b3b3b3;
+    padding: 5px;
+    border-radius: 5px;
+}
+
 .bucket-list-nav a {
     text-decoration: none;
+    margin-left: auto;
     color: #80add1;
     border: 2px solid #b3b3b3;
     padding: 5px;
