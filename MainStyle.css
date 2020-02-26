@@ -1,8 +1,20 @@
+html {
+    box-sizing: border-box;
+}
+
 body {
     background-color: rgba(225, 233, 237, 0.31);
     color: #171717;
     margin: 0;
     font-family: 'Roboto', 'sans-serif';
+}
+
+.user-buttons {
+    display: flex;
+}
+
+.user-buttons a {
+    margin: 0 5px 0 5px;
 }
 
 .main-box h1 {
@@ -136,8 +148,8 @@ div.item p {
 }
 
 .dropdown {
-    position: relative;
-    display: inline-block;
+    display: flex;
+    margin: 0 5px 0 5px;
 }
 
 .dropdown-content {
