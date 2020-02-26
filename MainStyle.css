@@ -44,6 +44,7 @@ div.item p {
     width: 100%;
     padding: 0;
     margin: 0;
+    border-bottom: 0.1em solid #c7493a;
 }
 
 .navigation-bar a {
