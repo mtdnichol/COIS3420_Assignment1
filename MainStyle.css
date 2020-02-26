@@ -54,6 +54,14 @@ body {
     margin-block-end: 0.2em;
 }
 
+#main-form label {
+    font-size: .8em;
+}
+
+#main-form button {
+    font-size: .6em;
+}
+
 .item img {
     max-width: 80px;
     max-height: 80px;
@@ -162,6 +170,7 @@ form input {
     background: transparent;
     border-bottom: 1px solid #171717;
     margin: 1em;
+    font-size: 1em;
 }
 
 button.centered {
