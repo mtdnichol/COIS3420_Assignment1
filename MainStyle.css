@@ -145,6 +145,8 @@ div.item p {
     background-color: rgba(238, 238, 238, 0.8);
     width: 35%;
     border: 0;
+    padding: 0px 10px;
+    color: #171717;
 
     border-bottom: 1px solid #b3b3b3;
     font-size: 1.2em;
