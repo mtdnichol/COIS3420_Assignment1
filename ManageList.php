@@ -1,3 +1,17 @@
+<?php
+session_start();
+require "./includes/library.php";
+
+if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
+    header("Location: Login.php");
+    exit();
+}
+
+//INSERT INTO table (name)
+//OUTPUT Inserted.ID
+//VALUES('bob');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +40,7 @@
     </div>
 
     <div class="main-box">
-        <h1>Bobby's Bucket List</h1>
+        <h1><?php echo $_SESSION['username']?>'s Bucket List</h1>
         <div class="bucket-list-nav">
             <button id="addItem" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
             <button id="editList" name="editList" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>

@@ -36,7 +36,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     </div>
 
     <div class="main-box">
-        <h1>Bobby's Bucket List</h1>
+        <h1><?php echo $_SESSION['username']?>'s Bucket List</h1>
         <div class="bucket-list-nav">
             <a href="ManageList.php" class="right"><i class="fas fa-tasks"></i> Manage</a>
         </div>

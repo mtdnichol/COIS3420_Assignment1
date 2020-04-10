@@ -1,8 +1,9 @@
 <?php
 //https://www.idiotinside.com/2016/05/21/secure-password-hashing-php/
 
-session_start();
+session_start(); //Does this do anything?  How do I clear session variables on logout?
 session_destroy();
+session_start();
 require "./includes/library.php";
 
 $errors = [];
@@ -15,7 +16,7 @@ if (isset($_POST['submit'])) {
     /* Connect to DB */
     $pdo = connectDB();
 
-    /* Check the database for occurances of $username */
+    /* Check the database for occurrences of $username */
     $query = "SELECT id, username, password FROM `bucket_users` WHERE username = ?";
     $statement = $pdo->prepare($query);
 
@@ -35,7 +36,6 @@ if (isset($_POST['submit'])) {
         array_push($errors, "Incorrect password.");
     }
 }
-
 ?>
 
 <!DOCTYPE html>
