@@ -47,10 +47,19 @@ if (isset($_POST['submit'])) {
         $options = ['cost' => 12];
         $password = password_hash($password, PASSWORD_DEFAULT, $options);
 
-        $query = "INSERT INTO bucket_users (username, password) VALUES (?,?)";
+        $query = "INSERT INTO bucket_users (username, password, email) VALUES (?,?,?)";
         $statement = $pdo->prepare($query);
-        $statement->execute([ $username, $password ]);
-        header("Location: DisplayList.html");
+        $statement->execute([ $username, $password, $email ]);
+
+        $query = "SELECT id, username FROM `bucket_users` WHERE username = ?";
+        $statement = $pdo->prepare($query);
+        $statement->execute([ $username ]);
+        $results = $statement->fetch();
+
+        $_SESSION['username'] = $results['username'];
+        $_SESSION['userID'] = $results['id'];
+
+        header("Location: DisplayList.php");
         exit();
     }
 
@@ -68,7 +77,7 @@ if (isset($_POST['submit'])) {
 //        $query = "INSERT INTO bucket_users (username, password) VALUES (?,?)";
 //        $statement = $pdo->prepare($query);
 //        $statement->execute([ $username, $password ]);
-//        header("Location: DisplayList.html");
+//        header("Location: DisplayList.php");
 //        exit();
 //    }
 }
@@ -88,7 +97,7 @@ if (isset($_POST['submit'])) {
     <div class="main-box">
         <h1>Register</h1>
 
-        <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Redirect to DisplayList.html -->
+        <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Redirect to DisplayList.php -->
             <div class="box2">
                 <div>
                     <label for="email"><i class="fas fa-envelope"></i></label>

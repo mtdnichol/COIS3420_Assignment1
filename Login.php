@@ -2,6 +2,7 @@
 //https://www.idiotinside.com/2016/05/21/secure-password-hashing-php/
 
 session_start();
+session_destroy();
 require "./includes/library.php";
 
 $errors = [];
@@ -15,7 +16,7 @@ if (isset($_POST['submit'])) {
     $pdo = connectDB();
 
     /* Check the database for occurances of $username */
-    $query = "SELECT username, password FROM `bucket_users` WHERE username = ?";
+    $query = "SELECT id, username, password FROM `bucket_users` WHERE username = ?";
     $statement = $pdo->prepare($query);
 
     $statement->execute([ $username ]);
@@ -27,7 +28,8 @@ if (isset($_POST['submit'])) {
         array_push($errors, "That user doesn't exist.");
     } else if (password_verify($password, $results['password'])) {
         $_SESSION['username'] = $username;
-        header("Location: DisplayList.html");
+        $_SESSION['userID'] = $results['id'];
+        header("Location: DisplayList.php");
         exit();
     } else {
         array_push($errors, "Incorrect password.");
