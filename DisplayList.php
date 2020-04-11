@@ -6,6 +6,25 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     header("Location: Login.php");
     exit();
 }
+
+/* Connect to DB */
+$pdo = connectDB();
+
+$query = "SELECT 1 FROM `bucket_lists` WHERE fk_listid = ?";
+$statement = $pdo->prepare($query);
+$statement->execute([$_SESSION['userID']]);
+$results = $statement->fetch();
+
+if ($results !== FALSE) {
+    //A list exists for the user, might want to auto generate a list for the user upon registration
+} else {
+
+}
+
+$query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
+$statement = $pdo->prepare($query);
+$statement->execute([$_SESSION['userID']]);
+$results = $statement->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +32,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 <head>
     <meta charset="UTF-8">
     <title>Bucket List</title>
-    <link rel="stylesheet" href="MainStyle.css">
+    <link rel="stylesheet" href="css/MainStyle.css">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato:300,400,700|Roboto:300,400,700&display=swap" rel="stylesheet">
     <script defer src="./scripts/logout.js"></script>
     <script src="https://kit.fontawesome.com/1c8ee6a0f5.js" crossorigin="anonymous"></script>
@@ -40,6 +59,17 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
         <div class="bucket-list-nav">
             <a href="ManageList.php" class="right"><i class="fas fa-tasks"></i> Manage</a>
         </div>
+
+        <?php foreach ($results as $result): ?>
+            <div class ="item">
+                <img src="<?= $result['photo'] ?>" alt="TestImage">
+                <div class="bucket-content">
+                    <h3><?= $result['title'] ?></h3>
+                    <p><?= $result['description'] ?></p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
         <div class ="item">
             <img src="https://i.pinimg.com/280x280_RS/d2/29/97/d229972ff3e0a850cbd0e90985b853df.jpg" alt="TestImage">
             <div class="bucket-content">

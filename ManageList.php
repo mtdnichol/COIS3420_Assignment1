@@ -7,6 +7,16 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     exit();
 }
 
+/* Connect to DB */
+$pdo = connectDB();
+
+$query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
+$statement = $pdo->prepare($query);
+$statement->execute([1]);
+$results = $statement->fetchAll();
+
+var_dump($results);
+
 //INSERT INTO table (name)
 //OUTPUT Inserted.ID
 //VALUES('bob');
@@ -17,9 +27,11 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 <head>
     <meta charset="UTF-8">
     <title>Bucket List</title>
-    <link rel="stylesheet" href="MainStyle.css">
+    <link rel="stylesheet" href="css/MainStyle.css">
+    <link rel="stylesheet" href="css/Modal.css">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato:300,400,700|Roboto:300,400,700&display=swap" rel="stylesheet">
     <script defer src="./scripts/logout.js"></script>
+    <script defer src="./scripts/ManageList.js"></script>
     <script src="https://kit.fontawesome.com/1c8ee6a0f5.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -39,6 +51,28 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
         </div>
     </div>
 
+    <!-- Define all modals -->
+    <div class="bg-modal" id="addItemModal">
+        <div class="modal-contents">
+            <div class="close">Cancel</div>
+            <form action="">
+                <input type="text" placeholder="Title">
+                <input type="email" placeholder="Description">
+                <button id="submit" name="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="bg-modal" id="editListModal">
+        <div class="modal-contents">
+            <div class="close">Cancel</div>
+            <form action="">
+                <input type="text" placeholder="Title">
+                <button id="submit" name="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
     <div class="main-box">
         <h1><?php echo $_SESSION['username']?>'s Bucket List</h1>
         <div class="bucket-list-nav">
@@ -50,6 +84,22 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
                 <a href="DisplayList.php"><i class="fas fa-sign-out-alt"></i> Exit</a>
             </div>
         </div>
+
+        <?php foreach ($results as $result): ?>
+            <div class ="item">
+                <div class="item-buttons">
+                    <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
+                    <button class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
+                    <button class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
+                </div>
+                <img src="<?= $result['photo'] ?>" alt="TestImage">
+                <div class="bucket-content" value="<?= $result['id'] ?>">
+                    <h3><?= $result['title'] ?></h3>
+                    <p><?= $result['description'] ?></p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
         <div class ="item">
             <div class="item-buttons">
                 <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
