@@ -10,16 +10,25 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 /* Connect to DB */
 $pdo = connectDB();
 
+$query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ?";
+$statement = $pdo->prepare($query);
+$statement->execute([$_SESSION['userID']]);
+$userLists = $statement->fetchAll();
+
+$query = "SELECT title FROM `bucket_lists` WHERE id = ?";
+$statement = $pdo->prepare($query);
+$statement->execute([1]);
+$title = $statement->fetch();
+
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
 $statement->execute([1]);
 $results = $statement->fetchAll();
 
-var_dump($results);
-
-//INSERT INTO table (name)
-//OUTPUT Inserted.ID
-//VALUES('bob');
+if (isset($_POST['exit'])) {
+    header("Location: DisplayList.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +37,7 @@ var_dump($results);
     <meta charset="UTF-8">
     <title>Bucket List</title>
     <link rel="stylesheet" href="css/MainStyle.css">
-    <link rel="stylesheet" href="css/Modal.css">
+    <link rel="stylesheet" href="css/Slider.css">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato:300,400,700|Roboto:300,400,700&display=swap" rel="stylesheet">
     <script defer src="./scripts/logout.js"></script>
     <script defer src="./scripts/ManageList.js"></script>
@@ -39,8 +48,11 @@ var_dump($results);
         <div class="dropdown">
             <button class="dropbtn">My Bucket Lists</button>
             <div class="dropdown-content">
-                <a href="DisplayList.php">Bobby's Bucket List</a>
-                <a href="DisplayList.php">Bucket List 2</a>
+                <?php foreach ($userLists as $list): ?>
+                    <a href="DisplayList.php" value="<?= $list['id'] ?>"><?= $list['title'] ?></a>
+                <?php endforeach; ?>
+<!--                <a href="DisplayList.php">Bobby's Bucket List</a>-->
+<!--                <a href="DisplayList.php">Bucket List 2</a>-->
             </div>
         </div>
         <input type="text" placeholder="&#xF002;    Search..." style="font-family:'Roboto', FontAwesome,serif">
@@ -51,37 +63,26 @@ var_dump($results);
         </div>
     </div>
 
-    <!-- Define all modals -->
-    <div class="bg-modal" id="addItemModal">
-        <div class="modal-contents">
-            <div class="close">Cancel</div>
-            <form action="">
-                <input type="text" placeholder="Title">
-                <input type="email" placeholder="Description">
-                <button id="submit" name="submit">Submit</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="bg-modal" id="editListModal">
-        <div class="modal-contents">
-            <div class="close">Cancel</div>
-            <form action="">
-                <input type="text" placeholder="Title">
-                <button id="submit" name="submit">Submit</button>
-            </form>
-        </div>
-    </div>
-
     <div class="main-box">
         <h1><?php echo $_SESSION['username']?>'s Bucket List</h1>
+        <h2><?php echo $title['title'] ?></h2>
         <div class="bucket-list-nav">
-            <button id="addItem" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
-            <button id="editList" name="editList" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
-            <button id="deleteList" name="deleteList" data-tippy-content="Delete List"><i class="fas fa-trash-alt"></i></button>
-            <div class="exit-buttons">
-                <a href="DisplayList.php"><i class="fas fa-save"></i> Save</a>
-                <a href="DisplayList.php"><i class="fas fa-sign-out-alt"></i> Exit</a>
+            <form id="list-options" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+                <div class="button-horizontal">
+                    <button id="addItem" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
+                    <button id="editList" name="editList" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
+                    <button id="deleteList" name="deleteList" data-tippy-content="Delete List"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            </form>
+            <div class="exit-buttons button-horizontal">
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"><span class="on">Private</span><span class="off">Public</span></span>
+                </label>
+                <form id="exit-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+                    <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
+                </form>
+<!--                <a href="DisplayList.php"><i class="fas fa-sign-out-alt"></i> Exit</a>-->
             </div>
         </div>
 
@@ -142,5 +143,6 @@ var_dump($results);
     <script>
         tippy('[data-tippy-content]');
     </script>
+    <script defer src="./scripts/ManageList.js"></script>
 </body>
 </html>

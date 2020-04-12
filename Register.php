@@ -51,35 +51,25 @@ if (isset($_POST['submit'])) {
         $statement = $pdo->prepare($query);
         $statement->execute([ $username, $password, $email ]);
 
-        $query = "SELECT id, username FROM `bucket_users` WHERE username = ?";
-        $statement = $pdo->prepare($query);
-        $statement->execute([ $username ]);
-        $results = $statement->fetch();
+        $_SESSION['username'] = $username;
+        $_SESSION['userID'] = $pdo->lastInsertId();
 
-        $_SESSION['username'] = $results['username'];
-        $_SESSION['userID'] = $results['id'];
+//        $query = "SELECT id, username FROM `bucket_users` WHERE username = ?";
+//        $statement = $pdo->prepare($query);
+//        $statement->execute([ $username ]);
+//        $results = $statement->fetch();
+
+//        $_SESSION['username'] = $results['username'];
+//        $_SESSION['userID'] = $results['id'];
+
+        //Create default list for user
+        $query = "INSERT INTO bucket_lists (title, fk_userid) VALUES ('Default List',?)";
+        $statement = $pdo->prepare($query);
+        $statement->execute([$_SESSION['userID']]);
 
         header("Location: DisplayList.php");
         exit();
     }
-
-//    //Original implementation, only displays 1 error at a time
-//    if (!empty($results)) { //Database contains a user registered with the name
-//        array_push($errors, "Username taken.");
-//    } else if (!preg_match($email_regex, $email)) { //Checks if the email passes regex
-//        array_push($errors, "Invalid email formatting.");
-//    } else if ($password != $password_check) { //Checks if the passwords entered match
-//        array_push($errors, "Passwords Don't Match.");
-//    } else {
-//        $options = ['cost' => 12];
-//        $password = password_hash($password, PASSWORD_DEFAULT, $options);
-//
-//        $query = "INSERT INTO bucket_users (username, password) VALUES (?,?)";
-//        $statement = $pdo->prepare($query);
-//        $statement->execute([ $username, $password ]);
-//        header("Location: DisplayList.php");
-//        exit();
-//    }
 }
 
 ?>

@@ -10,21 +10,22 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 /* Connect to DB */
 $pdo = connectDB();
 
-$query = "SELECT 1 FROM `bucket_lists` WHERE fk_listid = ?";
+$query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ?";
 $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
-$results = $statement->fetch();
+$userLists = $statement->fetchAll();
 
-if ($results !== FALSE) {
-    //A list exists for the user, might want to auto generate a list for the user upon registration
-} else {
-
-}
+$query = "SELECT title FROM `bucket_lists` WHERE id = ?";
+$statement = $pdo->prepare($query);
+$statement->execute([1]); //Replace with list number, check if first time loading
+$title = $statement->fetch();
 
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
-$statement->execute([$_SESSION['userID']]);
+$statement->execute([1]);
 $results = $statement->fetchAll();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -42,8 +43,11 @@ $results = $statement->fetchAll();
         <div class="dropdown">
             <button class="dropbtn">My Bucket Lists</button>
             <div class="dropdown-content">
-                <a href="DisplayList.php">Bobby's Bucket List</a>
-                <a href="DisplayList.php">Bucket List 2</a>
+                <?php foreach ($userLists as $list): ?>
+                    <a href="DisplayList.php" value="<?= $list['id'] ?>"><?= $list['title'] ?></a>
+                <?php endforeach; ?>
+<!--                <a href="DisplayList.php">Bobby's Bucket List</a>-->
+<!--                <a href="DisplayList.php">Bucket List 2</a>-->
             </div>
         </div>
         <input type="text" placeholder="&#xF002;    Search..." style="font-family:'Roboto', FontAwesome,serif">
@@ -56,6 +60,7 @@ $results = $statement->fetchAll();
 
     <div class="main-box">
         <h1><?php echo $_SESSION['username']?>'s Bucket List</h1>
+        <h2><?php echo $title['title'] ?></h2>
         <div class="bucket-list-nav">
             <a href="ManageList.php" class="right"><i class="fas fa-tasks"></i> Manage</a>
         </div>

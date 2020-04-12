@@ -12,6 +12,8 @@ body {
     color: #171717;
     margin: 0;
     font-family: 'Roboto', 'sans-serif';
+    width: 100%;
+    height: 100%;
 }
 
 .hidden {
@@ -49,13 +51,17 @@ body {
     transition: 0.3s;
 }
 
-.main-box h1 {
+.main-box h1, h2 {
     text-align: center;
     font-family: 'Fredoka One', 'sans-serif';
     font-weight: normal;
     font-size: 3em;
     margin-block-start: 0.5em;
     margin-block-end: 0.2em;
+}
+
+.main-box h2 {
+    font-size: 2.5em;
 }
 
 #main-form label {
@@ -337,4 +343,10 @@ div.item p {
 
 .dropdown a:active {
     text-decoration: none;
+}
+
+.button-horizontal {
+    display: flex;
+    flex-direction: row;
+    font-size: .6em;
 }
