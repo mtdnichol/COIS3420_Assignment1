@@ -92,11 +92,6 @@ if (isset($_POST['exit'])) {
             </form>
         <?php endforeach; ?>
     </div>
-    <script src="https://unpkg.com/popper.js@1"></script>
-    <script src="https://unpkg.com/tippy.js@5"></script>
-    <script>
-        tippy('[data-tippy-content]');
-    </script>
     <script defer src="./scripts/ManageList.js"></script>
 <?php include "./includes/footer.php"; ?>
 

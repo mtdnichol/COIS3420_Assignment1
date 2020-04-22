@@ -1,12 +1,11 @@
 .list-container {
-    max-width: 60%;
+    width: 60%;
     border: 2px solid #595656;
     border-radius: 10px;
     padding: 0.8em;
     background: #E0EAFC;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    cursor: pointer;
 }
 
 .list-container {
@@ -18,6 +17,7 @@
 .list-info {
     height: 100%;
     width: 85%;
+    cursor: pointer;
 }
 
 .list-properties {
@@ -54,11 +54,19 @@
 }
 
 .list-public {
-    color: #41bf80;
     margin: 0.3rem 0 0.3rem 0;
+}
+
+.public  {
+    color: #41bf80;
+}
+
+.private {
+    color: #e00025;
 }
 
 .list-copy {
     color: #5a70ff;
     margin: 0.3rem 0 0.3rem 0;
+    text-decoration: none;
 }

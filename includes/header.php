@@ -18,7 +18,11 @@
                 console.log(event.key);
                 if (event.key === "Enter") {
                     event.preventDefault();
-                    document.location.href = "Search?title=" + event.target.value;
+                    if(event.target.value === "") {
+                        document.location.href = "Search";
+                    } else {
+                        document.location.href = "Search?title=" + event.target.value;
+                    }
                 }
             });
         });
@@ -35,7 +39,6 @@
         </div>
     </div>
     <input id="list-search" type="text" placeholder="&#xF002;    Search..." style="font-family:'Roboto', FontAwesome,serif">
-    <button>I'm Feeling Lucky</button>
 
     <div class="user-buttons">
         <a href="Login.php" id="logout">Logout</a>
