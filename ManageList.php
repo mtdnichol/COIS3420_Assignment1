@@ -25,7 +25,7 @@ $title = $statement->fetch();
 
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
-$statement->execute([1]);
+$statement->execute([$curID]);
 $results = $statement->fetchAll();
 
 if (isset($_POST['deleteItem'])) {
@@ -66,7 +66,7 @@ if (isset($_POST['exit'])) {
                     <input type="checkbox">
                     <span class="slider round"><span class="on">Private</span><span class="off">Public</span></span>
                 </label>
-                <form id="exit-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+                <form id="exit-form" action="<?php echo "DisplayList.php?id=".$_GET['id']?>" method="POST">
                     <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
                 </form>
 <!--                <a href="DisplayList.php"><i class="fas fa-sign-out-alt"></i> Exit</a>-->
@@ -76,7 +76,6 @@ if (isset($_POST['exit'])) {
         <?php foreach ($results as $result): ?>
             <form id="item-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
                 <input type="hidden" name="value" value="<?php $result['id'] ?>">
-
                 <div class ="item">
                     <div class="item-buttons">
                         <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
@@ -91,43 +90,6 @@ if (isset($_POST['exit'])) {
                 </div>
             </form>
         <?php endforeach; ?>
-
-        <div class ="item">
-            <div class="item-buttons">
-                <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
-                <button class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
-                <button class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
-            </div>
-            <img src="https://i.pinimg.com/280x280_RS/d2/29/97/d229972ff3e0a850cbd0e90985b853df.jpg" alt="TestImage">
-            <div class="bucket-content">
-                <h3>Travel to Rome</h3>
-                <p>Rome has always been a place I've dreamed of visiting. It's a place with rich culture, amazing food, and spectacular views. I can't wait to experience all it has to offer.</p>
-            </div>
-        </div>
-        <div class ="item">
-            <div class="item-buttons">
-                <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
-                <button class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
-                <button class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
-            </div>
-            <img src="https://www.globalizationpartners.com/wp-content/uploads/2018/07/brazil.jpg" alt="TestImage">
-            <div class="bucket-content">
-                <h3>Travel to Brazil</h3>
-                <p>Brazil has always been a place I've dreamed of visiting. It's a place with rich culture, amazing food, and spectacular views. I can't wait to experience all it has to offer.</p>
-            </div>
-        </div>
-        <div class ="item">
-            <div class="item-buttons">
-                <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
-                <button class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
-                <button class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
-            </div>
-            <img src="https://img.thedailybeast.com/image/upload/dpr_2.0/c_crop,h_1440,w_1440,x_485,y_0/c_limit,w_128/d_placeholder_euli9k,fl_lossy,q_auto/v1529617465/180621-Kemper-Spain-fairy-tale-castle-03_eavjvs" alt="TestImage">
-            <div class="bucket-content">
-                <h3>Travel to Spain</h3>
-                <p>Spain has always been a place I've dreamed of visiting. It's a place with rich culture, amazing food, and spectacular views. I can't wait to experience all it has to offer.</p>
-            </div>
-        </div>
     </div>
     <script src="https://unpkg.com/popper.js@1"></script>
     <script src="https://unpkg.com/tippy.js@5"></script>
