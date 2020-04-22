@@ -7,17 +7,22 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     exit();
 }
 
-// Current List ID
-$curID = $_GET['id'];
-
+if(!isset($_GET['id']) || !(!is_int($_GET['id'] && strtolower($_GET['id']) != "random"))) {
+    // TODO error
+}
 
 /* Connect to DB */
 $pdo = connectDB();
 
-$query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ?";
-$statement = $pdo->prepare($query);
-$statement->execute([$_SESSION['userID']]);
-$userLists = $statement->fetchAll();
+// Current List ID
+$curID = $_GET['id'];
+
+if(strtolower($curID) == "random") {
+    $query = "SELECT id FROM bucket_lists ORDER BY RAND() LIMIT 1";
+    $statement = $pdo->prepare($query);
+    $statement->execute();
+    $curID = $statement->fetch()['id'];
+}
 
 $query = "SELECT title FROM `bucket_lists` WHERE id = ?";
 $statement = $pdo->prepare($query);
