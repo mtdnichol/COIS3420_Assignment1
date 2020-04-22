@@ -63,9 +63,9 @@ if (isset($_POST['submit'])) {
 //        $_SESSION['userID'] = $results['id'];
 
         //Create default list for user
-        $query = "INSERT INTO bucket_lists (title, fk_userid) VALUES ('Default List',?)";
-        $statement = $pdo->prepare($query);
-        $statement->execute([$_SESSION['userID']]);
+//        $query = "INSERT INTO bucket_lists (title, fk_userid) VALUES ('Default List',?)";
+//        $statement = $pdo->prepare($query);
+//        $statement->execute([$_SESSION['userID']]);
 
         header("Location: DisplayList.php");
         exit();
