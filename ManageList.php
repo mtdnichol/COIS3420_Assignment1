@@ -50,26 +50,27 @@ if (isset($_POST['exit'])) {
             <button id="titleSubmit">Submit</button>
         </div>
 
-        <div class="bucket-list-nav">
-            <div class="button-horizontal">
-                <button id="addItem" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
-                <button id="editList" name="editList" onclick="titleSwap(); return false;" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
-<!--                Form to submit list id using get to profile page, allowing list to be deleted-->
-<!--                currently points to login since no profile page-->
-                <form action="./Login.php" method="POST">
-                    <input type="hidden" name="listID" value="<?php echo $_GET['id'] ?>">
-                    <button id="deleteList" name="deleteList" data-tippy-content="Delete List" onclick="return confirmation()"><i class="fas fa-trash-alt"></i></button>
-                </form>
+        <div class="bucketListNav" style="">
+            <div class="leftButtons">
+                <div class="button-horizontal">
+                    <button id="addItem" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
+                    <button id="editList" name="editList" onclick="titleSwap(); return false;" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
+                    <!--                Form to submit list id using get to profile page, allowing list to be deleted-->
+                    <!--                currently points to login since no profile page-->
+                    <form action="./Login.php" method="POST">
+                        <input type="hidden" name="listID" value="<?php echo $_GET['id'] ?>">
+                        <button id="deleteList" name="deleteList" data-tippy-content="Delete List" onclick="return confirmation()"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                </div>
             </div>
-            <div class="exit-buttons button-horizontal">
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"><span class="on">Private</span><span class="off">Public</span></span>
-                </label>
-                <form id="exit-form" action="<?php echo "DisplayList.php?id=".$_GET['id']?>" method="POST">
-                    <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
-                </form>
-<!--                <a href="DisplayList.php"><i class="fas fa-sign-out-alt"></i> Exit</a>-->
+            <div class="rightButtons">
+                <div class="button-horizontal">
+                    <button class="" id="privatize" name="privatize" data-tippy-content="Make Private"><i class="fa fa-lock"></i></button>
+                    <form id="exit-form" action="<?php echo "DisplayList.php?id=".$_GET['id']?>" method="POST">
+                        <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
+                    </form>
+                </div>
+
             </div>
         </div>
 
