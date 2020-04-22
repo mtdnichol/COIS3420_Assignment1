@@ -58,7 +58,7 @@ if (isset($_POST['exit'])) {
 <!--                currently points to login since no profile page-->
                 <form action="./Login.php" method="POST">
                     <input type="hidden" name="listID" value="<?php echo $_GET['id'] ?>">
-                    <button id="deleteList" name="deleteList" data-tippy-content="Delete List"><i class="fas fa-trash-alt"></i></button>
+                    <button id="deleteList" name="deleteList" data-tippy-content="Delete List" onclick="return confirmation()"><i class="fas fa-trash-alt"></i></button>
                 </form>
             </div>
             <div class="exit-buttons button-horizontal">
