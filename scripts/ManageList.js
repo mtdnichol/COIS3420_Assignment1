@@ -53,3 +53,12 @@ document.querySelector("#titleSubmit").addEventListener("click", function(){
 });
 
 // *****
+
+
+// *****
+// DELETE LIST FUNCTION
+function deleteList(){
+    // ajax call to db to remove list with id = to current & redirect to current
+    console.log("coming");
+
+}

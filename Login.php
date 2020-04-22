@@ -6,6 +6,7 @@ session_destroy();
 session_start();
 require "./includes/library.php";
 
+
 $errors = [];
 
 if (isset($_POST['submit'])) {
@@ -36,6 +37,18 @@ if (isset($_POST['submit'])) {
         echo "<script language='javascript'>document.querySelector(\"#reset\").classList.remove(\"hidden\");</script>";
         array_push($errors, "Incorrect password.");
     }
+}
+
+if (isset($_POST['deleteList'])){
+    $listID = $_POST['listID'];
+
+    /* Connect to DB */
+    $pdo = connectDB();
+
+    // query to delete list matching id
+    $query = "DELETE FROM bucket_lists WHERE id=?";
+    $statement = $pdo->prepare($query);
+    $statement->execute([$listID]); // fill with passed in id
 }
 ?>
 
