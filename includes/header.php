@@ -25,6 +25,10 @@
                     }
                 }
             });
+
+            document.querySelector(".search i").addEventListener('click', (event) => {
+                document.location.href = "DisplayList?id=random"
+            });
         });
     </script>
 </head>
@@ -38,7 +42,10 @@
             <?php endforeach; ?>
         </div>
     </div>
-    <input id="list-search" type="text" placeholder="&#xF002;    Search..." style="font-family:'Roboto', FontAwesome,serif">
+    <div class="search">
+        <input id="list-search" type="text" placeholder="&#xF002;    Search..." style="font-family:'Roboto', FontAwesome,serif">
+        <i class="fas fa-magic" data-tippy-content="I'm Feeling Lucky"></i>
+    </div>
 
     <div class="user-buttons">
         <a href="Login.php" id="logout">Logout</a>

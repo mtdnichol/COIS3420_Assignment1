@@ -291,7 +291,7 @@ div.item p {
 /* SEARCH BAR */
 .navigation-bar input[type=text]{
     background-color: rgba(238, 238, 238, 0.8);
-    width: 35%;
+    width: 100%;
     border: 0;
     padding: 0px 10px;
     color: #171717;
@@ -308,6 +308,23 @@ div.item p {
     font-size: 1.2em;
     color: #b3b3b3;
 }
+
+.search {
+    display: flex;
+    align-self: stretch;
+    font-size: 1.2em;
+    width: 35%;
+}
+
+.search i {
+    display: flex;
+    align-self: center;
+    font-size: 1.7em;
+    color: #b3b3b3;
+    margin: 0.5em;
+    cursor: pointer;
+}
+
 /*Dropdown Starts*/
 .dropbtn {
     background-color: white;
