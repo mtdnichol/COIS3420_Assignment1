@@ -29,18 +29,34 @@ if (isset($_POST['exit'])) {
     header("Location: DisplayList.php");
     exit();
 }
+
+function titleChange($newTitle){
+    // pull title from input box on button click
+
+    // update db with title
+
+    // re-display on screen
+}
+
 ?>
 
 <!--html file starts-->
 <?php include "./includes/header.php"; ?>
     <div class="main-box">
         <h1><?php echo $_SESSION['username']?>'s Bucket List</h1>
-        <h2><?php echo $title['title'] ?></h2>
+        <div class="titleHeader">
+            <h2><?php echo $title['title'] ?></h2>
+        </div>
+        <div class="titleEdit hidden">
+            <input type="text">
+            <button id="titleSubmit">Submit</button>
+        </div>
+
         <div class="bucket-list-nav">
             <form id="list-options" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
                 <div class="button-horizontal">
                     <button id="addItem" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
-                    <button id="editList" name="editList" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
+                    <button id="editList" name="editList" onclick="titleSwap(); return false;" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
                     <button id="deleteList" name="deleteList" data-tippy-content="Delete List"><i class="fas fa-trash-alt"></i></button>
                 </div>
             </form>
