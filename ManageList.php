@@ -73,6 +73,9 @@ function titleChange($newTitle){
         </div>
 
         <?php foreach ($results as $result): ?>
+            <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+            </form>
+
             <div class ="item">
                 <div class="item-buttons">
                     <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
