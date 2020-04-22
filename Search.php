@@ -37,21 +37,69 @@ $searchLine = empty($title) ? "Find all lists" : "Find lists associated with ".$
     <h3><?php echo $searchLine ?></h3>
     <?php foreach($searchLists as $key=>$value): ?>
     <div class="list-container">
-        <div class="list-info">
-            <p class="list-title">List Title by Dctr</p>
-            <p class="list-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat</p>
-            <p class="list-date">Dec 21. 2019</p>
+        <div class="list-info" id="<?php echo $value['id'] ?>">
+            <p class="list-title"><?php echo $value['title']." By ".$value['username']; ?></p>
+            <p class="list-description"><?php echo $value['description']; ?></p>
+            <p class="list-date"><?php echo $value['created']; ?></p>
         </div>
         <div class="list-properties">
             <div class="list-status">
-                <p class="list-public">Public <i class="fas fa-lock-open"></i></p>
+                <?php
+                    if($value['private'] == 0) {
+                        echo '<p class="list-public public">Public <i class="fas fa-lock-open"></i></p>';
+                    } else {
+                        echo '<p class="list-public private">Private <i class="fas fa-lock-closed"></i></p>';
+                    }
+                ?>
             </div>
             <div class="list-links">
-                <p class="list-copy">Copy Link <i class="fas fa-clone"></i></p>
+                <a class="list-copy" href="#" id="<?php echo $value['id'] ?>">Copy Link <i class="fas fa-clone"></i></a>
             </div>
         </div>
     </div>
     <?php endforeach; ?>
 </div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll(".list-info").forEach(node => {
+            node.addEventListener('click', (event) => {
+                document.location.href = "DisplayList?id=" + node.id;
+            });
+        });
+
+        let dir = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+        document.querySelectorAll(".list-copy").forEach(node => {
+            node.addEventListener("click", (event) => {
+                copyToClipboard(dir + "/DisplayList?id=" + event.target.id);
+            });
+        });
+    });
+
+    // Copies a string to the clipboard. TAKEN FROM STACK OVERFLOW
+    function copyToClipboard(text) {
+        if (window.clipboardData && window.clipboardData.setData) {
+            // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.
+            return clipboardData.setData("Text", text);
+
+        }
+        else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+            var textarea = document.createElement("textarea");
+            textarea.textContent = text;
+            textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in Microsoft Edge.
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+            }
+            catch (ex) {
+                console.warn("Copy to clipboard failed.", ex);
+                return false;
+            }
+            finally {
+                document.body.removeChild(textarea);
+            }
+        }
+    }
+</script>
 <?php include "./includes/footer.php"; ?>
 
