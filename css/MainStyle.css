@@ -470,3 +470,7 @@ button.delete:hover {
 }
 
 button.delete:focus {outline:0;}
+
+div.large {
+    max-width: 90%;
+}

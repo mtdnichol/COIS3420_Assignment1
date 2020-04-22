@@ -8,3 +8,8 @@ function getConfirmation() {
         return false;
     }
 }
+
+function getLink(listID) {
+    let dir = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+    dir + "/DisplayList?id=1"
+}

@@ -52,11 +52,11 @@ if (isset($_POST['submit'])) {
 ?>
 
 <head>
-    <script src="./scripts/deleteConfirmation.js"></script>
+    <script src="scripts/Profile.js"></script>
 </head>
 <!-- HTML Starts -->
 <?php include "./includes/header.php"; ?>
-    <div class="main-box">
+    <div class="main-box large">
         <h1><?php echo $_SESSION['username']?>'s Profile</h1>
 
         <div class="leftAlignText">
@@ -87,7 +87,13 @@ if (isset($_POST['submit'])) {
 
                     <td><?= $list['description'] ?></td>
                     <td><?= $list['created'] ?></td>
-                    <td></td>
+                    <td><a href="<?php
+                        $currPath = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                        echo substr($currPath, 0, strrpos($currPath, '/')) . "/DisplayList?id=" . $list['id'];
+                        ?>"><?php
+                            $currPath = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                            echo substr($currPath, 0, strrpos($currPath, '/')) . "/DisplayList?id=" . $list['id'];
+                            ?></a></td>
                 </tr>
             <?php endforeach; ?>
         </table>
