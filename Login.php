@@ -6,7 +6,6 @@ session_destroy();
 session_start();
 require "./includes/library.php";
 
-
 $errors = [];
 
 if (isset($_POST['submit'])) {

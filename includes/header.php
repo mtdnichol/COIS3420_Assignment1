@@ -39,6 +39,6 @@
 
     <div class="user-buttons">
         <a href="Login.php" id="logout">Logout</a>
-        <a>Profile</a>
+        <a href="Profile.php">Profile</a>
     </div>
 </div>

@@ -2,72 +2,45 @@
 session_start();
 require "./includes/library.php";
 
-//if the user isn't signed in, redirect to login page
-if(!isset($_SESSION['loggedin'])){
-  header('Location: Login.php');
-  exit;
+if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
+    header("Location: Login.php");
+    exit();
 }
 
-//make a connection to database
+/* Connect to DB */
 $pdo = connectDB();
 
-//query selecting  username, password and email from the Bucket User
-$query ='SELECT username, password, email FROM bucket_users WHERE username = ?';
-$statement = $pdo -> prepare($query);
-$statement -> execute([$_SESSION['username']]);
-$userInfo = $statement -> fetchAll();
-
-//to display the bucket list of the signned in user account
-$query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ?";
+$query = "SELECT email FROM `bucket_users` WHERE id=?";
 $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
-$userLists = $statement->fetchAll();
- ?>
+$email = $statement->fetch();
 
- <!DOCTYPE html>
- <html>
-   <head>
-     <meta charset="utf-8">
-     <title>Profile</title>
-     <link rel="stylesheet" href="/css/MainStyle.css">
-     <script defer src="./scripts/logout.js"></script>
-     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-   </head>
-   <body>
-     <nav class = "topnav">
-       <div>
-         <h1>Website Title</h1>
-				<a href="profile.php"><i class="fas fa-user-circle"></i>Profile</a>
-				<a href="logout.js"><i class="fas fa-sign-out-alt"></i>Logout</a>
-       </div>
-     </nav>
-     <div class="content">
-       <h2>Profile Page</h2>
-       <div>
-         <p>Your account details are below:</p>
-				<table>
-					<tr>
-						<td>Username:</td>
-						<td><?=$_SESSION['username']?></td>
-					</tr>
-					<tr>
-						<td>Password:</td>
-						<td><?=$password?></td>
-					</tr>
-					<tr>
-						<td>Email:</td>
-						<td><?=$email?></td>
-					</tr>
-          <tr>
-            <td>Bucket list: </td>
-            <td>
-            <?php foreach ($userLists as $list): ?>
-          <a href="DisplayList.php" value="<?= $list['id'] ?>"><?= $list['title'] ?></a>
-            <?php endforeach; ?>
-          </td>
-          </tr>
-				</table>
-       </div>
-     </div>
-   </body>
- </html>
+$query = "SELECT * FROM `bucket_lists` WHERE id = ?";
+$statement = $pdo->prepare($query);
+$statement->execute([$_SESSION['userID']]);
+$lists = $statement->fetchAll();
+
+?>
+
+<!-- HTML Starts -->
+<?php include "./includes/header.php"; ?>
+    <div class="main-box">
+        <h1><?php echo $_SESSION['username']?>'s Profile Page</h1>
+
+        <h2>Account Details</h2>
+        <p>Username: <?php echo $_SESSION['username']?></p>
+        <p>E-mail: <?php echo $email['email']?></p>
+
+        <h2>Your Bucket Lists</h2>
+        <?php foreach ($results as $result): ?>
+            <div class ="item">
+                <img src="<?= $result['photo'] ?>" alt="TestImage">
+                <div class="bucket-content">
+                    <h3><?= $result['title'] ?></h3>
+                    <p><?= $result['description'] ?></p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+    </div>
+<?php include "./includes/footer.php"; ?>
