@@ -54,7 +54,9 @@ if (isset($_POST['exit'])) {
             <div class="leftButtons">
                 <div class="button-horizontal">
                     <button id="addItem" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
-                    <button id="editList" name="editList" onclick="titleSwap(); return false;" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+                        <button id="editList" name="editList" onclick="titleSwap(); return false;" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
+                    </form>
                     <!--                Form to submit list id using get to profile page, allowing list to be deleted-->
                     <!--                currently points to login since no profile page-->
                     <form action="./Login.php" method="POST">
