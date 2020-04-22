@@ -62,3 +62,10 @@ function deleteList(){
     console.log("coming");
 
 }
+
+function confirmation(){
+    var result = confirm("Want to Delete List?");
+    if (!result){
+        return false;
+    }
+}

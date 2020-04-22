@@ -92,11 +92,33 @@ body {
     justify-content: flex-start;
     width: 95%;
     margin: 0 auto;
-    font-size: 1.1em;
 }
 
 .right {
     margin-left: auto;
+}
+
+.bucketListNav {
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    align-items: center;
+}
+
+
+.bucketListNav button{
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    padding: 5px;
+    margin: 0 2px 0 2px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    background: none;
+}
+
+.bucketListNav button:hover {
+    color: #a0cdf1;
 }
 
 .bucket-list-nav button {
@@ -182,7 +204,6 @@ a.inline:visited {
 
 #exit {
     display: block;
-    margin: 0.5em 0.3em;
     font-size: 1.5em;
 }
 
@@ -230,7 +251,7 @@ div.item {
     display: flex;
     border: 0.1em solid #b3b3b3;
     width: 100%;
-    margin: 10px;
+    margin: 1.5% 0 0 0;
     border-radius: 10px;
     align-items: center;
 }
@@ -361,4 +382,8 @@ div.item p {
     display: flex;
     flex-direction: row;
     font-size: .6em;
+}
+
+.privatize {
+    height: 100%;
 }
