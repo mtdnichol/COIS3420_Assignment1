@@ -25,6 +25,10 @@ $statement = $pdo->prepare($query);
 $statement->execute([1]);
 $results = $statement->fetchAll();
 
+if (isset($_POST['deleteItem'])) {
+    echo $_POST['value'];
+}
+
 if (isset($_POST['exit'])) {
     header("Location: DisplayList.php");
     exit();
@@ -37,7 +41,6 @@ function titleChange($newTitle){
 
     // re-display on screen
 }
-
 ?>
 
 <!--html file starts-->
@@ -68,26 +71,24 @@ function titleChange($newTitle){
                 <form id="exit-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
                     <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
                 </form>
-<!--                <a href="DisplayList.php"><i class="fas fa-sign-out-alt"></i> Exit</a>-->
             </div>
         </div>
 
         <?php foreach ($results as $result): ?>
-            <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+            <form id="item-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+                <div class ="item">
+                    <div class="item-buttons">
+                        <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
+                        <button class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
+                        <button class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    <img src="<?= $result['photo'] ?>" alt="TestImage">
+                    <div class="bucket-content" value="<?= $result['id'] ?>">
+                        <h3><?= $result['title'] ?></h3>
+                        <p><?= $result['description'] ?></p>
+                    </div>
+                </div>
             </form>
-
-            <div class ="item">
-                <div class="item-buttons">
-                    <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
-                    <button class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
-                    <button class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
-                </div>
-                <img src="<?= $result['photo'] ?>" alt="TestImage">
-                <div class="bucket-content" value="<?= $result['id'] ?>">
-                    <h3><?= $result['title'] ?></h3>
-                    <p><?= $result['description'] ?></p>
-                </div>
-            </div>
         <?php endforeach; ?>
 
         <div class ="item">

@@ -86,34 +86,35 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="main-box">
         <h1>Register</h1>
+        <div class="login-box">
+            <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Redirect to DisplayList.php -->
+                <div class="box2">
+                    <div>
+                        <label for="email"><i class="fas fa-envelope"></i></label>
+                        <input id="email" name="email" type="text" placeholder="E-mail">
+                    </div>
+                    <div>
+                        <input id="username" name="username" type="text" placeholder="Username">
+                        <label for="username"><i class="fas fa-user"></i></label>
+                    </div>
+                </div>
+                <div class="box2">
+                    <div>
+                        <label for="password"><i class="fas fa-lock"></i></label>
+                        <input id="password" name="password" type="text" placeholder="Password">
+                    </div>
+                    <div>
+                        <input id="password-check" name="password-check" type="text" placeholder="Re-type Password">
+                        <label for="password-check"><i class="fas fa-lock"></i></label>
+                    </div>
+                </div>
 
-        <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Redirect to DisplayList.php -->
-            <div class="box2">
-                <div>
-                    <label for="email"><i class="fas fa-envelope"></i></label>
-                    <input id="email" name="email" type="text" placeholder="E-mail">
-                </div>
-                <div>
-                    <input id="username" name="username" type="text" placeholder="Username">
-                    <label for="username"><i class="fas fa-user"></i></label>
-                </div>
-            </div>
-            <div class="box2">
-                <div>
-                    <label for="password"><i class="fas fa-lock"></i></label>
-                    <input id="password" name="password" type="text" placeholder="Password">
-                </div>
-                <div>
-                    <input id="password-check" name="password-check" type="text" placeholder="Re-type Password">
-                    <label for="password-check"><i class="fas fa-lock"></i></label>
-                </div>
-            </div>
-
-            <button id="submit" name="submit" class="centered">Register</button>
-            <?php foreach ($errors as $error): ?>
-                <p><?= $error ?></p>
-            <?php endforeach; ?>
-        </form>
+                <button id="submit" name="submit" class="centered">Register</button>
+                <?php foreach ($errors as $error): ?>
+                    <p><?= $error ?></p>
+                <?php endforeach; ?>
+            </form>
+        </div>
     </div>
 </body>
 </html>
