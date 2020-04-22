@@ -5,6 +5,7 @@
     <title>Bucket List</title>
     <link rel="stylesheet" href="css/MainStyle.css">
     <link rel="stylesheet" href="css/Slider.css">
+    <link rel="stylesheet" href="css/List.css">
     <link rel="icon" type="image/png" href="images/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato:300,400,700|Roboto:300,400,700&display=swap" rel="stylesheet">
     <script defer src="./scripts/logout.js"></script>
@@ -31,14 +32,13 @@
             <?php foreach ($userLists as $list): ?>
                 <a href="DisplayList.php" value="<?= $list['id'] ?>"><?= $list['title'] ?></a>
             <?php endforeach; ?>
-            <!--                <a href="DisplayList.php">Bobby's Bucket List</a>-->
-            <!--                <a href="DisplayList.php">Bucket List 2</a>-->
         </div>
     </div>
     <input id="list-search" type="text" placeholder="&#xF002;    Search..." style="font-family:'Roboto', FontAwesome,serif">
+    <button>I'm Feeling Lucky</button>
 
     <div class="user-buttons">
         <a href="Login.php" id="logout">Logout</a>
-        <a>Profile</a>
+        <a href="Profile.php">Profile</a>
     </div>
 </div>

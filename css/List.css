@@ -1,0 +1,64 @@
+.list-container {
+    max-width: 60%;
+    border: 2px solid #595656;
+    border-radius: 10px;
+    padding: 0.8em;
+    background: #E0EAFC;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    cursor: pointer;
+}
+
+.list-container {
+    display: flex;
+    flex-direction: row;
+    margin: 1em;
+}
+
+.list-info {
+    height: 100%;
+    width: 85%;
+}
+
+.list-properties {
+    height: 100%;
+    width: 15%;
+}
+
+.list-title {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0.5rem;
+}
+
+.list-description {
+    font-size: 0.9em;
+    margin: 0.5rem;
+}
+
+.list-date {
+    font-size: 0.7em;
+    margin: 0.5rem;
+}
+
+.list-properties {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.list-status, .list-links {
+    display: flex;
+    align-self: flex-end;
+    font-size: 0.9em;
+}
+
+.list-public {
+    color: #41bf80;
+    margin: 0.3rem 0 0.3rem 0;
+}
+
+.list-copy {
+    color: #5a70ff;
+    margin: 0.3rem 0 0.3rem 0;
+}
