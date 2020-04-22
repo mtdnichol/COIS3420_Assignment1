@@ -3,10 +3,17 @@
 //https://www.youtube.com/watch?v=gLWIYk0Sd38 Modal source
 window.addEventListener('DOMContentLoaded', () => {
     const markCompleteButtons = document.querySelectorAll("button[name=markItem]");
+    const deleteItemButtons = document.querySelectorAll("button[name=deleteItem]")
 
     for (const button of markCompleteButtons) {
         button.addEventListener('click', event => { //Event listener for paragraph on click
             button.parentElement.parentElement.style.backgroundColor = "#01D27F";
+        });
+    }
+
+    for (const button of deleteItemButtons) {
+        button.addEventListener('click', event => { //Event listener for paragraph on click
+            button.parentElement.parentElement.remove();
         });
     }
 });

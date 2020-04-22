@@ -20,13 +20,17 @@ $userLists = $statement->fetchAll();
 
 $query = "SELECT title FROM `bucket_lists` WHERE id = ?";
 $statement = $pdo->prepare($query);
-$statement->execute([$curID]);
+$statement->execute([1]);
 $title = $statement->fetch();
 
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
-$statement->execute([$curID]);
+$statement->execute([1]);
 $results = $statement->fetchAll();
+
+if (isset($_POST['deleteItem'])) {
+    echo $_POST['value'];
+}
 
 if (isset($_POST['exit'])) {
     header("Location: DisplayList.php");
@@ -62,7 +66,7 @@ if (isset($_POST['exit'])) {
                     <input type="checkbox">
                     <span class="slider round"><span class="on">Private</span><span class="off">Public</span></span>
                 </label>
-                <form id="exit-form" action="<?php echo "Login.php?id=".$_GET['id']?>" method="POST">
+                <form id="exit-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
                     <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
                 </form>
 <!--                <a href="DisplayList.php"><i class="fas fa-sign-out-alt"></i> Exit</a>-->
@@ -70,18 +74,22 @@ if (isset($_POST['exit'])) {
         </div>
 
         <?php foreach ($results as $result): ?>
-            <div class ="item">
-                <div class="item-buttons">
-                    <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
-                    <button class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
-                    <button class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
+            <form id="item-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+                <input type="hidden" name="value" value="<?php $result['id'] ?>">
+
+                <div class ="item">
+                    <div class="item-buttons">
+                        <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
+                        <button class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
+                        <button class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    <img src="<?= $result['photo'] ?>" alt="TestImage">
+                    <div class="bucket-content" value="<?= $result['id'] ?>">
+                        <h3><?= $result['title'] ?></h3>
+                        <p><?= $result['description'] ?></p>
+                    </div>
                 </div>
-                <img src="<?= $result['photo'] ?>" alt="TestImage">
-                <div class="bucket-content" value="<?= $result['id'] ?>">
-                    <h3><?= $result['title'] ?></h3>
-                    <p><?= $result['description'] ?></p>
-                </div>
-            </div>
+            </form>
         <?php endforeach; ?>
 
         <div class ="item">

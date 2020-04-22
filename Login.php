@@ -63,23 +63,23 @@ if (isset($_POST['deleteList'])){
 <body>
     <div class="main-box">
         <h1>Login</h1>
+        <div class="login-box">
+            <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Redirect to DisplayList.html upon completion -->
+                <div>
+                    <label for="username"><i class="fas fa-envelope"></i></label>
+                    <input id="username" name="username" type="text" placeholder="Username">
+                </div>
+                <div>
+                    <label for="password"><i class="fas fa-lock"></i></label>
+                    <input id="password" name="password" type="text" placeholder="Password">
+                </div>
 
-        <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Redirect to DisplayList.html upon completion -->
-            <div>
-                <label for="username"><i class="fas fa-envelope"></i></label>
-                <input id="username" name="username" type="text" placeholder="Username">
-            </div>
-            <div>
-                <label for="password"><i class="fas fa-lock"></i></label>
-                <input id="password" name="password" type="text" placeholder="Password">
-            </div>
-
-            <button id="submit" name="submit" class="centered">Login</button>
-            <?php foreach ($errors as $error): ?>
-                <p><?= $error ?></p>
-            <?php endforeach; ?>
-        </form>
-
+                <button id="submit" name="submit" class="centered">Login</button>
+                <?php foreach ($errors as $error): ?>
+                    <p><?= $error ?></p>
+                <?php endforeach; ?>
+            </form>
+        </div>
         <p>Don't have an account?  <a href="Register.php" class="inline">Register</a> instead.</p>
     </div>
 </body>

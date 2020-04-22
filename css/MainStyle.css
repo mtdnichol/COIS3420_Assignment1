@@ -164,17 +164,30 @@ a.inline:visited {
     text-decoration: none;
 }
 
-form {
+.login-box form {
     display: block;
     font-size: 1.5em;
 }
 
-form div, fieldset, form button {
+.login-box fieldset, button {
     display: block;
     margin: 0.5em 0.3em;
 }
 
-form input {
+#list-options button{
+    display: block;
+    margin: 0.5em 0.3em;
+    font-size: 1.5em;
+}
+
+#exit {
+    display: block;
+    margin: 0.5em 0.3em;
+    font-size: 1.5em;
+}
+
+
+.login-box form input {
     border: 0;
     outline: 0;
     background: transparent;
