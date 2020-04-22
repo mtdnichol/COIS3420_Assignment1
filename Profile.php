@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
             <p><b>E-mail</b>: <?php echo $email['email']?></p>
         </div>
 
-        <h3 class="space">Your Bucket Lists</h3>
+        <h3 class="space profileFormat">Your Bucket Lists</h3>
         <table class="profile">
             <tr>
                 <th>List Name</th>
@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
 
                     <td><?= $list['description'] ?></td>
                     <td><?= $list['created'] ?></td>
-                    <td>INSERT LINK</td>
+                    <td></td>
                 </tr>
             <?php endforeach; ?>
         </table>
