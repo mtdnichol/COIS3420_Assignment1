@@ -51,16 +51,14 @@
     display: flex;
     align-self: flex-end;
     font-size: 0.9em;
-
-}
-
-.list-links {
 }
 
 .list-public {
     color: #41bf80;
+    margin: 0.3rem 0 0.3rem 0;
 }
 
 .list-copy {
     color: #5a70ff;
+    margin: 0.3rem 0 0.3rem 0;
 }
