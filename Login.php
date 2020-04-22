@@ -33,6 +33,7 @@ if (isset($_POST['submit'])) {
         header("Location: DisplayList.php");
         exit();
     } else {
+        echo "<script language='javascript'>document.querySelector(\"#reset\").classList.remove(\"hidden\");</script>";
         array_push($errors, "Incorrect password.");
     }
 }
@@ -67,6 +68,7 @@ if (isset($_POST['submit'])) {
                 <?php endforeach; ?>
             </form>
         </div>
+        <p id="reset" class="hidden">Forgot your password?  <a href="Register.php" class="inline">Reset</a></p>
         <p>Don't have an account?  <a href="Register.php" class="inline">Register</a> instead.</p>
     </div>
 </body>
