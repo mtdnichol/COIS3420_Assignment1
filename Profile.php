@@ -21,6 +21,8 @@ $statement->execute([$_SESSION['userID']]);
 $lists = $statement->fetchAll();
 
 if (isset($_POST['submit'])) {
+    echo "bananan";
+
     //Gets all the lists the user is associated with
     $query = "SELECT id FROM `bucket_lists` WHERE fk_userid=?";
     $statement = $pdo->prepare($query);
@@ -29,22 +31,24 @@ if (isset($_POST['submit'])) {
 
     //Deletes all of the entries in the lists the user is associated with
     foreach ($userLists as $list) {
-        $query = "DELETE * FROM `bucket_entries` WHERE fk_list=?";
+        $query = "DELETE FROM `bucket_entries` WHERE fk_list=?";
         $statement = $pdo->prepare($query);
         $statement->execute([$list['id']]);
     }
 
     //Deletes all the lists the user is associated with
-    $query = "DELETE * FROM `bucket_lists` WHERE fk_userid=?";
+    $query = "DELETE FROM `bucket_lists` WHERE fk_userid=?";
     $statement = $pdo->prepare($query);
     $statement->execute([$_SESSION['userID']]);
 
     //Deletes the user
-    $query = "DELETE * FROM `bucket_users` WHERE id=?";
+    $query = "DELETE FROM `bucket_users` WHERE id=?";
     $statement = $pdo->prepare($query);
     $statement->execute([$_SESSION['userID']]);
-}
 
+    header('Location: Login.php');
+    exit();
+}
 ?>
 
 <head>
@@ -89,11 +93,10 @@ if (isset($_POST['submit'])) {
         </table>
 
         <h3 class="space">Other Operations</h3>
-
-        <form id="delete-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-            <input id="submit" name="submit" type ="button" value="Delete Account" onclick = "getConfirmation();">
+        <form id="delete-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" onsubmit="getConfirmation()">
+            <button id="submit" name="submit" class="delete">Delete Account</button>
         </form>
 
-        <button class="delete">Delete Account</button>
+
     </div>
 <?php include "./includes/footer.php"; ?>
