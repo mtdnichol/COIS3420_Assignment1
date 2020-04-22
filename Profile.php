@@ -15,7 +15,7 @@ $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
 $email = $statement->fetch();
 
-$query = "SELECT * FROM `bucket_lists` WHERE id = ?";
+$query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ?";
 $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
 $lists = $statement->fetchAll();
@@ -25,22 +25,37 @@ $lists = $statement->fetchAll();
 <!-- HTML Starts -->
 <?php include "./includes/header.php"; ?>
     <div class="main-box">
-        <h1><?php echo $_SESSION['username']?>'s Profile Page</h1>
+        <h1><?php echo $_SESSION['username']?>'s Profile</h1>
 
-        <h2>Account Details</h2>
-        <p>Username: <?php echo $_SESSION['username']?></p>
-        <p>E-mail: <?php echo $email['email']?></p>
+        <div class="leftAlignText">
+            <h2>Account Details</h2>
+            <p><b>Username</b>: <?php echo $_SESSION['username']?></p>
+            <p><b>E-mail</b>: <?php echo $email['email']?></p>
+        </div>
 
         <h2>Your Bucket Lists</h2>
-        <?php foreach ($results as $result): ?>
-            <div class ="item">
-                <img src="<?= $result['photo'] ?>" alt="TestImage">
-                <div class="bucket-content">
-                    <h3><?= $result['title'] ?></h3>
-                    <p><?= $result['description'] ?></p>
-                </div>
-            </div>
-        <?php endforeach; ?>
+        <table class="profile">
+            <tr>
+                <th>List Name</th>
+                <th>Privacy Setting</th>
+                <th>Link</th>
+            </tr>
+
+            <?php foreach ($lists as $list): ?>
+                <tr>
+                    <td><?= $list['title'] ?></td>
+
+                    <?php if ($list['private'] == 0): ?>
+                        <td>Public</td>
+                    <?php else: ?>
+                        <td>Private</td>
+                    <?php endif ?>
+
+                    <td>INSERT LINK</td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+
 
     </div>
 <?php include "./includes/footer.php"; ?>

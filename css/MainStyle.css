@@ -387,3 +387,35 @@ div.item p {
 .privatize {
     height: 100%;
 }
+
+div.leftAlignText {
+    text-align: left;
+}
+
+table.profile {
+    border:none;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+table.profile th {
+    border-bottom: 1px solid #000;
+}
+
+table.profile td, th {
+    padding: 0.5em 1.5em 0.5em 1.5em;
+}
+
+table.profile td, th {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+
+}
+
+table.profile td:first-child, th:first-child {
+    border-left: none;
+}
+
+table.profile td:last-child, th:last-child {
+    border-right: none;
+}
