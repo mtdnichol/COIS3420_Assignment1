@@ -67,7 +67,8 @@ if (isset($_POST['exit'])) {
             </div>
             <div class="rightButtons">
                 <div class="button-horizontal">
-                    <button class="" id="privatize" name="privatize" data-tippy-content="Make Private"><i class="fa fa-lock"></i></button>
+                    <button class="hidden" id="privatize-lock" name="privatize-lock" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Private"><i class="fa fa-unlock"></i></button>
+                    <button id="privatize" name="privatize" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Private"><i class="fa fa-lock"></i></button>
                     <form id="exit-form" action="<?php echo "DisplayList.php?id=".$_GET['id']?>" method="POST">
                         <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
                     </form>

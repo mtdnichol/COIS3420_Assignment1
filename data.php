@@ -12,3 +12,15 @@ function titleUpdate($oldTitle, $newTitle){
 
     return true;
 }
+
+// swap privacy of list
+function privacySwap($listID){
+    $pdo = connectDB();
+
+    // get catagories from db
+    $query = "UPDATE bucket_lists SET private = NOT private WHERE id=?";
+    $statement = $pdo->prepare($query);
+    $statement->execute([$listID]);
+
+    return true;
+}

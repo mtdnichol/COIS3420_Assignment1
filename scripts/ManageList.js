@@ -56,15 +56,21 @@ document.querySelector("#titleSubmit").addEventListener("click", function(){
 });
 
 // *****
+// PRIVACY SWAP FUNCTION
+function privacySwap($listID){
+    // swap to lock buttons
+    document.querySelector("#privatize ").classList.toggle("hidden");
+    document.querySelector("#privatize-lock").classList.toggle("hidden");
 
+    var xhttp = new XMLHttpRequest();
+    console.log("tem");
+    xhttp.open("GET", "./api.php?privateSwap="+$listID, false);
+    xhttp.send();
 
-// *****
-// DELETE LIST FUNCTION
-function deleteList(){
-    // ajax call to db to remove list with id = to current & redirect to current
-    console.log("coming");
-
+    return false;
 }
+
+
 
 function confirmation(){
     var result = confirm("Want to Delete List?");
