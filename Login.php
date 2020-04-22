@@ -8,7 +8,13 @@ require "./includes/library.php";
 
 $errors = [];
 
+
+
 if (isset($_POST['submit'])) {
+    if (isset($_POST['failed']) == true) {
+        echo '<script>document.querySelector("#reset").classList.remove("hidden");</script>';
+    }
+
     /* Process log-in request */
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -33,8 +39,8 @@ if (isset($_POST['submit'])) {
         header("Location: DisplayList.php");
         exit();
     } else {
-        echo "<script language='javascript'>document.querySelector(\"#reset\").classList.remove(\"hidden\");</script>";
         array_push($errors, "Incorrect password.");
+        $_POST['failed'] = true;
     }
 }
 
