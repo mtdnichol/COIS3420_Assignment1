@@ -22,7 +22,8 @@ $title = $statement->fetch();
 
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
-$statement->execute([1]);
+
+$statement->execute([$_GET['id']]);
 $results = $statement->fetchAll();
 
 
