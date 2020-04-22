@@ -60,7 +60,7 @@ if (isset($_POST['submit'])) {
         <h1><?php echo $_SESSION['username']?>'s Profile</h1>
 
         <div class="leftAlignText">
-            <h3>Account Details</h3>
+            <h3 class="profileFormat">Account Details</h3>
             <p><b>Username</b>: <?php echo $_SESSION['username']?></p>
             <p><b>E-mail</b>: <?php echo $email['email']?></p>
         </div>
@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
             <?php endforeach; ?>
         </table>
 
-        <h3 class="space">Other Operations</h3>
+        <h3 class="space profileFormat">Other Operations</h3>
         <form id="delete-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" onsubmit="getConfirmation()">
             <button id="submit" name="submit" class="delete">Delete Account</button>
         </form>
