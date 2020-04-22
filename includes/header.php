@@ -5,6 +5,7 @@
     <title>Bucket List</title>
     <link rel="stylesheet" href="css/MainStyle.css">
     <link rel="stylesheet" href="css/Slider.css">
+    <link rel="stylesheet" href="css/List.css">
     <link rel="icon" type="image/png" href="images/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato:300,400,700|Roboto:300,400,700&display=swap" rel="stylesheet">
     <script defer src="./scripts/logout.js"></script>

@@ -28,15 +28,28 @@ $query = "SELECT bucket_lists.*, bucket_users.username FROM bucket_lists INNER J
 $statement = $pdo->prepare($query);
 $statement->execute(['%'.$title.'%', $min_limit, $max_limit]);
 $searchLists = $statement->fetchAll();
-var_dump($searchLists);
+$searchLine = empty($title) ? "Find all lists" : "Find lists associated with ".$title;
 ?>
 
 <?php include "./includes/header.php"; ?>
-<div>
+<div class="main-box">
+    <h1>Search Results</h1>
+    <h3><?php echo $searchLine ?></h3>
     <?php foreach($searchLists as $key=>$value): ?>
-    <div class="searchList">
-        <p><b>List:</b> <?php echo $value['title']?></p>
-        <p><b>Created By:</b> <?php echo $value['username']?></p>
+    <div class="list-container">
+        <div class="list-info">
+            <p class="list-title">List Title by Dctr</p>
+            <p class="list-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc maximus, nulla ut commodo sagittis, sapien dui mattis dui, non pulvinar lorem felis nec erat</p>
+            <p class="list-date">Dec 21. 2019</p>
+        </div>
+        <div class="list-properties">
+            <div class="list-status">
+                <p class="list-public">Public <i class="fas fa-lock-open"></i></p>
+            </div>
+            <div class="list-links">
+                <p class="list-copy">Copy Link <i class="fas fa-clone"></i></p>
+            </div>
+        </div>
     </div>
     <?php endforeach; ?>
 </div>
