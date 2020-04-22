@@ -7,6 +7,10 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     exit();
 }
 
+// Current List ID
+$curID = $_GET['id'];
+
+
 /* Connect to DB */
 $pdo = connectDB();
 
@@ -17,13 +21,13 @@ $userLists = $statement->fetchAll();
 
 $query = "SELECT title FROM `bucket_lists` WHERE id = ?";
 $statement = $pdo->prepare($query);
-$statement->execute([1]); //Replace with list number, check if first time loading
+$statement->execute([$curID]);
 $title = $statement->fetch();
 
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
 
-$statement->execute([$_GET['id']]);
+$statement->execute([$curID]);
 $results = $statement->fetchAll();
 
 
@@ -35,7 +39,8 @@ $results = $statement->fetchAll();
         <h1><?php echo $_SESSION['username']?>'s Bucket List</h1>
         <h2><?php echo $title['title'] ?></h2>
         <div class="bucket-list-nav">
-            <a href="ManageList.php" class="right"><i class="fas fa-tasks"></i> Manage</a>
+
+            <a href="<?php echo "ManageList.php?id=".$_GET['id']?>" class="right"><i class="fas fa-tasks"></i> Manage</a>
         </div>
 
         <?php foreach ($results as $result): ?>

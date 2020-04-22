@@ -7,6 +7,9 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     exit();
 }
 
+// current list id
+$curID = $_GET['id'];
+
 /* Connect to DB */
 $pdo = connectDB();
 
@@ -17,27 +20,18 @@ $userLists = $statement->fetchAll();
 
 $query = "SELECT title FROM `bucket_lists` WHERE id = ?";
 $statement = $pdo->prepare($query);
-$statement->execute([1]);
+$statement->execute([$curID]);
 $title = $statement->fetch();
 
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
-$statement->execute([1]);
+$statement->execute([$curID]);
 $results = $statement->fetchAll();
 
 if (isset($_POST['exit'])) {
     header("Location: DisplayList.php");
     exit();
 }
-
-function titleChange($newTitle){
-    // pull title from input box on button click
-
-    // update db with title
-
-    // re-display on screen
-}
-
 ?>
 
 <!--html file starts-->
@@ -53,19 +47,22 @@ function titleChange($newTitle){
         </div>
 
         <div class="bucket-list-nav">
-            <form id="list-options" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-                <div class="button-horizontal">
-                    <button id="addItem" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
-                    <button id="editList" name="editList" onclick="titleSwap(); return false;" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
+            <div class="button-horizontal">
+                <button id="addItem" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
+                <button id="editList" name="editList" onclick="titleSwap(); return false;" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
+<!--                Form to submit list id using get to profile page, allowing list to be deleted-->
+<!--                currently points to login since no profile page-->
+                <form action="./Login.php" method="POST">
+                    <input type="hidden" name="listID" value="<?php echo $_GET['id'] ?>">
                     <button id="deleteList" name="deleteList" data-tippy-content="Delete List"><i class="fas fa-trash-alt"></i></button>
-                </div>
-            </form>
+                </form>
+            </div>
             <div class="exit-buttons button-horizontal">
                 <label class="switch">
                     <input type="checkbox">
                     <span class="slider round"><span class="on">Private</span><span class="off">Public</span></span>
                 </label>
-                <form id="exit-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+                <form id="exit-form" action="<?php echo "Login.php?id=".$_GET['id']?>" method="POST">
                     <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
                 </form>
 <!--                <a href="DisplayList.php"><i class="fas fa-sign-out-alt"></i> Exit</a>-->
@@ -124,8 +121,8 @@ function titleChange($newTitle){
             </div>
         </div>
     </div>
-    <script defer src="https://unpkg.com/popper.js@1"></script>
-    <script defer src="https://unpkg.com/tippy.js@5"></script>
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@5"></script>
     <script>
         tippy('[data-tippy-content]');
     </script>
