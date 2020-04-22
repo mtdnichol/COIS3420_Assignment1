@@ -40,9 +40,12 @@ document.querySelector("#titleSubmit").addEventListener("click", function(){
     // grab text from input
     console.log(document.querySelector(".titleEdit input").value);
     let newTitle = document.querySelector(".titleEdit input").value;
-    console.log(newTitle);
+    let oldTitle = document.querySelector(".titleHeader h2").textContent;
 
-    // update with database -- ajax call to php script?
+    // update with database -- ajax call to api
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "./api.php?newTitle="+newTitle+"&oldTitle="+oldTitle, false);
+    xhttp.send();
 
     // update title in page
     document.querySelector(".titleHeader h2").textContent = newTitle;
