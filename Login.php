@@ -2,8 +2,6 @@
 //https://www.idiotinside.com/2016/05/21/secure-password-hashing-php/
 
 session_start(); //Does this do anything?  How do I clear session variables on logout?
-session_destroy();
-session_start();
 require "./includes/library.php";
 
 $errors = [];
