@@ -57,25 +57,30 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="css/MainStyle.css">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato:300,400,700|Roboto:300,400,700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1c8ee6a0f5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/passtrength.css">
+    <script
+            src="https://code.jquery.com/jquery-3.5.0.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+            crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="main-box">
         <h1>Account Recovery</h1>
         <div class="login-box">
             <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Redirect to DisplayList.html upon completion -->
-                <div>
+                <div class="icon-label">
                     <label for="username"><i class="fas fa-user"></i></i></label>
                     <input id="username" name="username" type="text" placeholder="Username">
                 </div>
 
-                <div>
+                <div class="icon-label">
                     <label for="username"><i class="fas fa-lock"></i></i></label>
-                    <input id="password" name="password" type="password" placeholder="New Password">
+                    <input id="password" name="password" type="password" placeholder="New Password" class="no-border no-margin">
                 </div>
 
-                <div>
+                <div class="icon-label">
                     <label for="username"><i class="fas fa-lock"></i></i></label>
-                    <input id="password-check" name="password-check" type="password" placeholder="Retype New Password">
+                    <input id="password-check" name="password-check" type="password" placeholder="Retype New Password" class="no-margin">
                 </div>
 
                 <button id="submit" name="submit" class="centered">Submit</button>
@@ -85,5 +90,11 @@ if (isset($_POST['submit'])) {
             </form>
         </div>
     </div>
+    <script type="text/javascript" src="scripts/jquery.passtrength.min.js"></script>
+    <script>
+        $('#password').passtrength({
+            passwordToggle:false,
+        });
+    </script>
 </body>
 </html>

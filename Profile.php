@@ -55,7 +55,7 @@ if (isset($_POST['submit'])) {
 <!-- HTML Starts -->
 <?php include "./includes/header.php"; ?>
     <div class="main-box large">
-        <h1><?php echo $_SESSION['username']?>'s Profile</h1>
+        <h1><?php echo ucfirst($_SESSION['username'])?>'s Profile</h1>
 
         <div class="leftAlignText">
             <h3 class="profileFormat">Account Details</h3>
