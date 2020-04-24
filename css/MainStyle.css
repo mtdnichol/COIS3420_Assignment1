@@ -230,6 +230,11 @@ a.inline:visited {
     font-size: 1em;
 }
 
+button.createButton {
+    font-size: .6em;
+    margin: .3em;
+}
+
 button.centered {
     color: #3c3f41;
     margin-left: auto;
@@ -614,4 +619,22 @@ div.main-splash {
 
 .padding-right {
     padding-right: 1em;
+}
+
+a.toButton {
+    color: var(--accent-color);
+    font-weight: bold;
+    background-color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+}
+
+a.toButton:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transition: 0.3s;
 }

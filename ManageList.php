@@ -9,7 +9,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 }
 
 if(!isset($_GET['id']) || !is_int($_GET['id'])) {
-    // TODO error
+    header('Location:');
 }
 
 /* Connect to DB */
