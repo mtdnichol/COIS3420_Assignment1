@@ -41,7 +41,7 @@ if (isset($_POST['exit'])) {
 <!--html file starts-->
 <?php include "./includes/header.php"; ?>
     <div class="main-box">
-        <h1><?php echo $_SESSION['username']?>'s Bucket List</h1>
+        <h1><?php echo ucfirst($_SESSION['username'])?>'s Bucket List</h1>
         <div class="titleHeader">
             <h2><?php echo $title['title'] ?></h2>
         </div>
@@ -68,7 +68,7 @@ if (isset($_POST['exit'])) {
             <div class="rightButtons">
                 <div class="button-horizontal">
                     <button class="hidden" id="privatize-lock" name="privatize-lock" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Private"><i class="fa fa-unlock"></i></button>
-                    <button id="privatize" name="privatize" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Private"><i class="fa fa-lock"></i></button>
+                    <button id="privatize" name="privatize" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make UnPrivate"><i class="fa fa-lock"></i></button>
                     <form id="exit-form" action="<?php echo "DisplayList.php?id=".$_GET['id']?>" method="POST">
                         <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
                     </form>

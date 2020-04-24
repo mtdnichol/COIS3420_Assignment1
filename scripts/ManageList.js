@@ -62,10 +62,18 @@ function privacySwap($listID){
     document.querySelector("#privatize ").classList.toggle("hidden");
     document.querySelector("#privatize-lock").classList.toggle("hidden");
 
-    var xhttp = new XMLHttpRequest();
-    console.log("tem");
-    xhttp.open("GET", "./api.php?privateSwap="+$listID, false);
-    xhttp.send();
+    var url = "./api.php?privateSwap="+$listID;
+
+    fetch(url)
+        .then(function(data){
+            // do response
+            console.log(data);
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+
+
 
     return false;
 }

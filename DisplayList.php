@@ -38,7 +38,7 @@ $results = $statement->fetchAll();
 <!--html starts-->
 <?php include "./includes/header.php"; ?>
     <div class="main-box">
-        <h1><?php echo $_SESSION['username']?>'s Bucket List</h1>
+        <h1><?php echo ucfirst($_SESSION['username'])?>'s Bucket List</h1>
         <h2><?php echo $title['title'] ?></h2>
         <div class="bucket-list-nav">
             <a href="<?php echo "ManageList.php?id=".$_GET['id']?>" class="right"><i class="fas fa-tasks"></i> Manage</a>
