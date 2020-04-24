@@ -69,7 +69,13 @@ if(!isOwner($curID)) {
         <div class="bucketListNav" style="">
             <div class="leftButtons">
                 <div class="button-horizontal">
-                    <button id="addItem" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
+                    <button id="addItem" data-open-modal="addItemModal" name="addItem" data-tippy-content="Add Item"><i class="fas fa-plus"></i></button>
+                    <div id="addItemModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn">&times;</span>
+                            <p>this is the text inside the modal</p>
+                        </div>
+                    </div>
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
                         <button id="editList" name="editList" onclick="titleSwap(); return false;" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
                     </form>

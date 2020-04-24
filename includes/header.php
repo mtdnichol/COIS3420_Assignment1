@@ -16,10 +16,12 @@ $userLists = $statement->fetchAll();
     <link rel="stylesheet" href="css/MainStyle.css">
     <link rel="stylesheet" href="css/Slider.css">
     <link rel="stylesheet" href="css/List.css">
+    <link rel="stylesheet" href="css/Modal.css">
     <link rel="icon" type="image/png" href="images/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato:300,400,700|Roboto:300,400,700&display=swap" rel="stylesheet">
     <script defer src="./scripts/logout.js"></script>
     <script src="https://kit.fontawesome.com/1c8ee6a0f5.js" crossorigin="anonymous"></script>
+    <script src="scripts/Modal.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             let input = document.getElementById("list-search");
