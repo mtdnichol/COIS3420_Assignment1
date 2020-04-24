@@ -19,11 +19,9 @@
         <div class="splashButtons">
             <a href="Login" id="backtoButton">
                 Login
-<!--                <button id="login" name="login" class="centered">Login</button>-->
             </a>
             <a href="Register" id="backtoButton">
                 Register
-<!--                <button id="login" name="login" class="centered">Register</button>-->
             </a>
         </div>
     </div>
