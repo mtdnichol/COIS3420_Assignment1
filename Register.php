@@ -108,6 +108,9 @@ if (isset($_POST['submit'])) {
             </div>
         </form>
     </div>
+    <a href="Login" id="backtoButton">
+        <button id="login" name="login" class="centered">Back to Login</button>
+    </a>
     <script type="text/javascript" src="scripts/jquery.passtrength.min.js"></script>
     <script>
         $('#password').passtrength({

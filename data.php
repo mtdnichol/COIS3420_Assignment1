@@ -15,7 +15,6 @@ function titleUpdate($oldTitle, $newTitle){
 
 // swap privacy of list
 function privacySwap($listID){
-    console.log("Privacy Swap");
     $pdo = connectDB();
 
     // get catagories from db
