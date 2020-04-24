@@ -46,3 +46,10 @@ if (!empty($data)){
         response(200, "task ran", NULL);
     }
 }
+
+// Delete item route
+if(!empty($_GET['deleteEntry'])){
+    if (deleteEntry($_GET['deleteEntry'])){
+        response(200, "Entry Deleted", NULL);
+    }
+}

@@ -7,6 +7,8 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     exit();
 }
 
+$errors = [];
+
 /* Connect to DB */
 $pdo = connectDB();
 
@@ -59,10 +61,24 @@ if (isset($_POST['deleteList'])){
     $statement = $pdo->prepare($query);
     $statement->execute([$listID]); // fill with passed in id
 }
+
+if (isset($_POST['completeCreation'])) {
+    $date = date("Y-m-d");
+    $private = 0;
+    if (!empty($_POST['privacy'])) {
+        $private = 1;
+    }
+
+    $query="INSERT INTO `bucket_lists`(`title`, `fk_userid`, `created`, `description`, `private`) VALUES (?,?,?,?,?)";
+    $statement = $pdo->prepare($query);
+    $statement->execute([$_POST['title'], $_SESSION['userID'], $date, $_POST['description'], $private]);
+    header("Refresh:0");
+}
 ?>
 
 <head>
     <script src="scripts/Profile.js"></script>
+    <link rel="stylesheet" href="css/createList.css">
 </head>
 <!-- HTML Starts -->
 <?php include "./includes/header.php"; ?>
@@ -76,6 +92,33 @@ if (isset($_POST['deleteList'])){
         </div>
 
         <h3 class="space profileFormat">Your Bucket Lists</h3>
+
+        <div class="bucketListNav">
+            <button id="createList" data-open-modal="createListModal" name="createList" data-tippy-content="Create A List"><i class="fas fa-plus"></i></button>
+            <div id="createListModal" class="modal">
+                <div class="modal-content login-box">
+                    <span class="close-btn">&times;</span>
+
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+                        <div>
+                            <label for="title"></i>List Title</label>
+                            <input id="title" name="title" type="text" placeholder="Title" required>
+                        </div>
+                        <div>
+                            <label for="description"></i>List Description</label>
+                            <input id="description" name="description" type="text" placeholder="Description" required>
+                        </div>
+                        <div>
+                            <label for="privacy"></i>Private</label>
+                            <input id="privacy" name="privacy" type="checkbox">
+                        </div>
+
+                        <button id="completeCreation" name="completeCreation" class="centered createButton">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <table class="profile">
             <tr>
                 <th>List Name</th>
@@ -115,4 +158,10 @@ if (isset($_POST['deleteList'])){
 
 
     </div>
+
+    <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
 <?php include "./includes/footer.php"; ?>

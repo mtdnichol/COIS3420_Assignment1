@@ -4,12 +4,12 @@ require "./includes/library.php";
 require "./includes/util.php";
 
 if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
-    header("Location: Login.php");
+    header("Location: Login");
     exit();
 }
 
 if(!isset($_GET['id']) || !(!is_int($_GET['id'] && strtolower($_GET['id']) != "random"))) {
-    // TODO error
+    header('Location: Error');
 }
 
 /* Connect to DB */
