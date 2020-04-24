@@ -25,10 +25,12 @@ if(strtolower($curID) == "random") {
     $curID = $statement->fetch()['id'];
 }
 
-$query = "SELECT title FROM `bucket_lists` WHERE id = ?";
+$query = "SELECT title, username FROM `bucket_lists` INNER JOIN bucket_users ON bucket_lists.fk_userid = bucket_users.id WHERE bucket_lists.id = ?";
 $statement = $pdo->prepare($query);
 $statement->execute([$curID]);
-$title = $statement->fetch();
+$list = $statement->fetch();
+$username = $list['username'];
+$title = $list['title'];
 
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
@@ -44,8 +46,8 @@ if(isPrivate($curID) && !isOwner($curID)) {
 <!--html starts-->
 <?php include "./includes/header.php"; ?>
     <div class="main-box">
-        <h1><?php echo ucfirst($_SESSION['username'])?>'s Bucket List</h1>
-        <h2><?php echo $title['title'] ?></h2>
+        <h1><?php echo $username ?>'s Bucket List</h1>
+        <h2><?php echo $title ?></h2>
         <div class="bucket-list-nav">
             <?php if(isOwner($curID)):?>
                 <a href="<?php echo "ManageList.php?id=".$_GET['id']?>" class="right"><i class="fas fa-tasks"></i> Manage</a>

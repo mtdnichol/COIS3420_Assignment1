@@ -8,21 +8,27 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     exit();
 }
 
-// current list id
-$curID = $_GET['id'];
+if(!isset($_GET['id']) || !is_int($_GET['id'])) {
+    // TODO error
+}
 
 /* Connect to DB */
 $pdo = connectDB();
+
+// current list id
+$curID = $_GET['id'];
 
 $query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ?";
 $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
 $userLists = $statement->fetchAll();
 
-$query = "SELECT title FROM `bucket_lists` WHERE id = ?";
+$query = "SELECT title, username FROM `bucket_lists` INNER JOIN bucket_users ON bucket_lists.fk_userid = bucket_users.id WHERE bucket_lists.id = ?";
 $statement = $pdo->prepare($query);
-$statement->execute([1]);
-$title = $statement->fetch();
+$statement->execute([$curID]);
+$list = $statement->fetch();
+$username = $list['username'];
+$title = $list['title'];
 
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
@@ -47,9 +53,9 @@ if(!isOwner($curID)) {
 <!--html file starts-->
 <?php include "./includes/header.php"; ?>
     <div class="main-box">
-        <h1><?php echo ucfirst($_SESSION['username'])?>'s Bucket List</h1>
+        <h1><?php echo $username ?>'s Bucket List</h1>
         <div class="titleHeader">
-            <h2><?php echo $title['title'] ?></h2>
+            <h2><?php echo $title ?></h2>
         </div>
         <div class="titleEdit hidden">
             <input type="text">
