@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
     } else if (password_verify($password, $results['password'])) {
         $_SESSION['username'] = $username;
         $_SESSION['userID'] = $results['id'];
-        header("Location: DisplayList.php");
+        header("Location: Profile");
         exit();
     } else {
         array_push($errors, "Incorrect password.");
@@ -88,8 +88,8 @@ if (isset($_POST['deleteList'])){
                 <?php endforeach; ?>
             </form>
         </div>
-        <p id="reset" class="hidden">Forgot your password?  <a href="Register.php" class="inline">Reset</a></p>
-        <p>Don't have an account?  <a href="Register.php" class="inline">Register</a> instead.</p>
+        <p id="reset" class="hidden">Forgot your password?  <a href="Register" class="inline">Reset</a></p>
+        <p>Don't have an account?  <a href="Register" class="inline">Register</a> instead.</p>
     </div>
 </body>
 </html>

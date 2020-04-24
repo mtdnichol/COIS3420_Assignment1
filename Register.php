@@ -67,7 +67,7 @@ if (isset($_POST['submit'])) {
 //        $statement = $pdo->prepare($query);
 //        $statement->execute([$_SESSION['userID']]);
 
-        header("Location: DisplayList.php");
+        header("Location: Profile");
         exit();
     }
 }
