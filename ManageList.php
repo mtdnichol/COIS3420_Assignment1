@@ -36,6 +36,11 @@ if (isset($_POST['exit'])) {
     header("Location: DisplayList.php");
     exit();
 }
+
+if(!isOwner($curID)) {
+    header("Location: Login.php");
+    exit();
+}
 ?>
 
 <!--html file starts-->
