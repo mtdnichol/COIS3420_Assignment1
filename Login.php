@@ -12,10 +12,6 @@ $errors = [];
 
 
 if (isset($_POST['submit'])) {
-    if (isset($_POST['failed']) == true) {
-        echo '<script>document.querySelector("#reset").classList.remove("hidden");</script>';
-    }
-
     /* Process log-in request */
     $username = $_POST['username'];
     $password = $_POST['password'];

@@ -50,7 +50,7 @@ if(isPrivate($curID) && !isOwner($curID)) {
         <h2><?php echo $title ?></h2>
         <div class="bucket-list-nav">
             <?php if(isOwner($curID)):?>
-                <a href="<?php echo "ManageList.php?id=".$_GET['id']?>" class="right"><i class="fas fa-tasks"></i> Manage</a>
+                <a href="<?php echo "ManageList?id=".$_GET['id']?>" class="right"><i class="fas fa-tasks"></i> Manage</a>
             <?php endif; ?>
         </div>
 

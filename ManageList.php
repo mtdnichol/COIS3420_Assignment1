@@ -44,12 +44,12 @@ if (isset($_POST['deleteItem'])) {
 }
 
 if (isset($_POST['exit'])) {
-    header("Location: DisplayList.php");
+    header("Location: DisplayList");
     exit();
 }
 
 if(!isOwner($curID)) {
-    header("Location: Login.php");
+    header("Location: Login");
     exit();
 }
 ?>
@@ -85,7 +85,7 @@ if(!isOwner($curID)) {
                 <div class="button-horizontal">
                     <button class="<?php echo isPrivate($_GET['id']) ? "" : "hidden"?>" id="privatize" name="privatize" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Public"><i class="fa fa-lock"></i></button>
                     <button class="<?php echo isPrivate($_GET['id']) ? "hidden" : ""?>" id="privatize-lock" name="privatize-lock" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Private"><i class="fa fa-unlock"></i></button>
-                    <form id="exit-form" action="<?php echo "DisplayList.php?id=".$_GET['id']?>" method="POST">
+                    <form id="exit-form" action="<?php echo "DisplayList?id=".$_GET['id']?>" method="POST">
                         <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
                     </form>
                 </div>
