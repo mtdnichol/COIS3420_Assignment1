@@ -49,6 +49,7 @@ if(!isOwner($curID)) {
 
 <!--html file starts-->
 <?php include "./includes/header.php"; ?>
+    <link href="https://transloadit.edgly.net/releases/uppy/v1.13.2/uppy.min.css" rel="stylesheet">
     <div class="main-box">
         <h1><?php echo ucfirst($username) ?>'s Bucket List</h1>
         <div class="titleHeader">
@@ -115,7 +116,16 @@ if(!isOwner($curID)) {
 
             <div class="item" data-item-id="<?php echo $result['id'] ?>">
                 <div class="item-buttons">
-                    <button id="markItem" class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
+                    <button id="markItem" onclick="resetUppy()" class="markItem" data-open-modal="markItemModal" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
+                    <div id="markItemModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn">&times;</span>
+                            <label> Completed Date: <input id="completedDate" type="date"></label>
+                            <button id="openUppy">Upload Image</button>
+                            <button onclick="return markItemComplete('<?php echo $result['id'] ?>');">Mark Completed</button>
+                            <p id="uploadErrors"></p>
+                        </div>
+                    </div>
                     <button data-open-modal="editItemModal" id="editItem" class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
                     <div id="editItemModal" class="modal">
                         <div class="modal-content">
@@ -143,5 +153,7 @@ if(!isOwner($curID)) {
             </div>
         <?php endforeach; ?>
     </div>
+
+    <script src="https://transloadit.edgly.net/releases/uppy/v1.13.2/uppy.min.js"></script>
     <script defer src="./scripts/ManageList.js"></script>
 <?php include "./includes/footer.php"; ?>

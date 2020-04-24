@@ -1,5 +1,49 @@
 "use strict";
 
+let uppy = Uppy.Core({
+    autoProceed: false,
+    restrictions: {
+        maxFileSize: 1000000,
+        maxNumberOfFiles: 1,
+        minNumberOfFiles: 1,
+        allowedFileTypes: ['image/*']
+    }
+})
+    .use(Uppy.Dashboard, {
+        autoProceed: false,
+        height: 470,
+        target: '#markItemModal',
+        trigger: '#openUppy',
+        replaceTargetContent: false,
+        showProgressDetails: true,
+        note: 'Max 1 Image',
+        hideUploadButton: true
+    })
+    .use(Uppy.GoogleDrive, {target: Uppy.Dashboard, companionUrl: 'https://companion.uppy.io' })
+    .use(Uppy.Dropbox, { target: Uppy.Dashboard, companionUrl: 'https://companion.uppy.io' })
+    .use(Uppy.Instagram, { target: Uppy.Dashboard, companionUrl: 'https://companion.uppy.io' })
+    .use(Uppy.Facebook, { target: Uppy.Dashboard, companionUrl: 'https://companion.uppy.io' })
+    .use(Uppy.OneDrive, { target: Uppy.Dashboard, companionUrl: 'https://companion.uppy.io' })
+    .use(Uppy.XHRUpload, {
+        endpoint: 'UploadImage.php',
+        formData: true,
+        fieldName: 'files[]'
+    })
+    .use(Uppy.Webcam, { target: Uppy.Dashboard });
+
+// *****
+// MARK ITEM COMPLETE FUNCTION
+function markItemComplete(itemID) {
+    let date = document.querySelector(".item[data-item-id=\"" + itemID + "\"] #completedDate").value;
+    uppy.upload().then(result => {
+        console.log(result);
+    });
+}
+
+function resetUppy() {
+    uppy.reset();
+}
+
 // *****
 // DELETE ITEM FUNCTION
 function deleteItem(itemID) {

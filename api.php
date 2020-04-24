@@ -62,5 +62,6 @@ if(!empty($_GET['deleteEntry'])){
     }
 }
 
-
-
+if(!empty($_GET['completeEntry'])) {
+    if(completeEntry($_GET['completeEntry'], $_POST)) response(200, "Entry Marked Complete", NULL);
+}

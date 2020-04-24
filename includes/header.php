@@ -21,6 +21,10 @@ $userLists = $statement->fetchAll();
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato:300,400,700|Roboto:300,400,700&display=swap" rel="stylesheet">
     <script defer src="./scripts/logout.js"></script>
     <script src="https://kit.fontawesome.com/1c8ee6a0f5.js" crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.5.0.min.js"
+            integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+            crossorigin="anonymous"></script>
     <script src="scripts/Modal.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
