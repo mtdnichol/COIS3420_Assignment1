@@ -1,3 +1,13 @@
+<?php
+/* Connect to DB */
+$pdo = connectDB();
+
+$query = "SELECT id, title FROM `bucket_lists` WHERE fk_userid = ?";
+$statement = $pdo->prepare($query);
+$statement->execute([$_SESSION['userID']]);
+$userLists = $statement->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

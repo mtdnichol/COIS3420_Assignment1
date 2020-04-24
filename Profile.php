@@ -21,8 +21,6 @@ $statement->execute([$_SESSION['userID']]);
 $lists = $statement->fetchAll();
 
 if (isset($_POST['submit'])) {
-    echo "bananan";
-
     //Gets all the lists the user is associated with
     $query = "SELECT id FROM `bucket_lists` WHERE fk_userid=?";
     $statement = $pdo->prepare($query);
