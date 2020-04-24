@@ -1,3 +1,5 @@
+<!-- Splash page -->
+
 <!DOCTYPE html>
 <html lang="en" class="splashPage">
 <head>
@@ -11,16 +13,16 @@
     <div class="splashPage main-box">
         <div class="headerBG">
             <h1>Bucket List Application</h1>
-            <h4>Jared | Bobby | Michael | Samuel</h4>
+            <h4>Jared | Bobby | Michael | Samuel</h4> <!-- Authors -->
         </div>
         <div class="iconOverlay">
-            <img src="images/Icon.png" alt="" class="splashIcon">
+            <img src="images/Icon.png" alt="" class="splashIcon"> <!-- Rotating bucket list icon -->
         </div>
-        <div class="splashButtons">
+        <div class="splashButtons"> <!-- Goto login -->
             <a href="Login" id="backtoButton">
                 Login
             </a>
-            <a href="Register" id="backtoButton">
+            <a href="Register" id="backtoButton"> <!-- Goto register -->
                 Register
             </a>
         </div>
