@@ -83,7 +83,17 @@ if(!isOwner($curID)) {
                     <div id="addItemModal" class="modal">
                         <div class="modal-content">
                             <span class="close-btn">&times;</span>
-                            <p>this is the text inside the modal</p>
+                            <div class="addModalContent">
+                                <label for="nameEdit" class="addLabel">Task Name</label>
+                                <input type="text" id="nameEdit">
+                            </div>
+                            <div class="addModalContent">
+                                <label for="descEdit" class="addLabel">Description</label>
+                                <textarea name="descEdit" id="descEdit" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="editSubmit addModalContent">
+                                <a onclick="addTask(<?php echo $_GET['id'] ?>)" id="addTaskSubmit">Submit</a>
+                            </div>
                         </div>
                     </div>
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
@@ -91,7 +101,7 @@ if(!isOwner($curID)) {
                     </form>
                     <!--                Form to submit list id using get to profile page, allowing list to be deleted-->
                     <!--                currently points to login since no profile page-->
-                    <form action="./Login" method="POST">
+                    <form action="Profile" method="POST">
                         <input type="hidden" name="listID" value="<?php echo $_GET['id'] ?>">
                         <button id="deleteList" name="deleteList" data-tippy-content="Delete List" onclick="return confirmation()"><i class="fas fa-trash-alt"></i></button>
                     </form>

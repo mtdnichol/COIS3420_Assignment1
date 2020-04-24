@@ -112,3 +112,34 @@ document.querySelector("#descSubmit").addEventListener("click", function(){
     document.querySelector(".bucketDesc").classList.toggle("hidden");
     document.querySelector(".bucketEdit").classList.toggle("hidden");
 });
+
+// add bucket list item
+document.querySelector("#addTaskSubmit").addEventListener("click", function(){
+
+});
+
+function addTask(listID){
+    console.log(listID);
+    // get new task name
+    let taskName = document.querySelector("#nameEdit").value;
+    console.log(taskName);
+    // get description
+    let taskDesc = document.querySelector("#descEdit").value;
+    console.log(taskDesc);
+
+    var url = "api.php?addTask="+listID;
+
+    fetch(url, {
+        method: 'post',
+        body: JSON.stringify({
+            taskName: taskName,
+            taskDesc: taskDesc
+        })
+    })
+        .then(function(data){
+            console.log(data.text().then(text => console.log(text)));
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+}

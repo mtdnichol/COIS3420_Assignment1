@@ -18,16 +18,27 @@
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.4s;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content div {
+    width: 75%;
+    justify-content: center;
+    display: flex;
 }
 .close-btn {
-    float: right;
+    align-self: flex-end;
     color: lightgray;
     font-size: 24px;
     font-weight: bold;
 }
 .close-btn:hover {
     color: darkgray;
+    cursor: pointer;
 }
 @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0}
