@@ -1,36 +1,35 @@
 <?php
 session_start();
-require "./includes/library.php";
+require "./includes/library.php"; //Imports required database files
 require "./includes/util.php";
 
-if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
-    header("Location: Login.php");
+if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) { //Ensures the user has a valid session
+    header("Location: Login.php"); //If not, redirect them to the login page
     exit();
 }
 
-if(!isset($_GET['id']) || !is_int($_GET['id'])) {
+if(!isset($_GET['id']) || !is_int($_GET['id'])) { //Checks that the list id passed is valid
     header('Location:');
 }
 
 /* Connect to DB */
 $pdo = connectDB();
 
-// current list id
+// current list id stored in the url
 $curID = $_GET['id'];
 
-$query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ?";
-$statement = $pdo->prepare($query);
-$statement->execute([$_SESSION['userID']]);
-$userLists = $statement->fetchAll();
-
+//Gets the list information as well as the username by joining tables
 $query = "SELECT title, username, description FROM `bucket_lists` INNER JOIN bucket_users ON bucket_lists.fk_userid = bucket_users.id WHERE bucket_lists.id = ?";
 $statement = $pdo->prepare($query);
 $statement->execute([$curID]);
 $list = $statement->fetch();
+
+//Assigns returned values to variables
 $username = $list['username'];
 $title = $list['title'];
 $description = $list['description'];
 
+//Queries the bucket entries for all associated lists
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
 $statement->execute([$curID]);

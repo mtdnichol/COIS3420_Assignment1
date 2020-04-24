@@ -1,15 +1,19 @@
 <?php
+// start session and include db
 session_start();
 require "./includes/library.php";
 
+// verify login
 if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     header("Location: Login");
     exit();
 }
 
+// connect to db and get current ID from passthrough
 $pdo = connectDB();
 $curID = $_GET['id'];
 
+// retrieve bucket items with matching ID
 $query = "SELECT * FROM `bucket_entries` WHERE id=?";
 $statement = $pdo->prepare($query);
 $statement->execute([$curID]);
