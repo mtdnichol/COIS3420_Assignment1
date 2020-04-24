@@ -1,5 +1,6 @@
 <?php
 require "./includes/library.php";
+// Global var for connecting to db
 $pdo = connectDB();
 
 // Return a JSON rsponse to the user
@@ -18,7 +19,7 @@ function response($status, $status_message, $data) {
 // title update function
 function titleUpdate($oldTitle, $newTitle){
 
-    // get catagories from db
+    // Find title from $oldTitle, replace in db with $newTitle
     $query = "UPDATE bucket_lists SET title = ? WHERE title = ?";
     $statement = $GLOBALS['pdo']->prepare($query);
     $statement->execute([$newTitle, $oldTitle]);
@@ -29,7 +30,7 @@ function titleUpdate($oldTitle, $newTitle){
 // description update function
 function descUpdate($oldDesc, $newDesc){
 
-    // get catagories from db
+    // Find desc from $oldDesc, replace in db with $newDesc
     $query = "UPDATE bucket_lists SET description = ? WHERE description = ?";
     $statement = $GLOBALS['pdo']->prepare($query);
     $statement->execute([$newDesc, $oldDesc]);
@@ -39,7 +40,7 @@ function descUpdate($oldDesc, $newDesc){
 
 // swap privacy of list
 function privacySwap($listID){
-    //get catagories from db
+    // Find list by list ID, inverse private field with NOT keyword
     $query = "UPDATE bucket_lists SET private = NOT private WHERE id=?";
     $statement = $GLOBALS['pdo']->prepare($query);
     $statement->execute([$listID]);
@@ -49,7 +50,7 @@ function privacySwap($listID){
 
 //add task function
 function addTask($listID, $taskName, $taskDesc){
-    //get catagories from db
+    // Insert a bucket list entry into the DB via given info
     $query = "INSERT INTO bucket_entries(fk_listid, title, description) VALUES ('$listID', '$taskName', '$taskDesc')";
     $statement = $GLOBALS['pdo']->prepare($query);
     $statement->execute([]);
@@ -57,6 +58,7 @@ function addTask($listID, $taskName, $taskDesc){
     return true;
 }
 
+// Delete an entry from the DB via a given entry ID
 function deleteEntry($entryID) {
     $query = "DELETE FROM bucket_entries WHERE id = ?";
     $statement = $GLOBALS['pdo']->prepare($query);
@@ -65,9 +67,8 @@ function deleteEntry($entryID) {
     return true;
 }
 
+// Edit a bucket list entry and replace its contents given by the params
 function editTask($taskID, $taskName, $taskDesc){
-    var_dump($taskID, $taskDesc, $taskName);
-    //get catagories from db
     $query = "UPDATE bucket_entries SET title=?, description=? WHERE id = ?";
     $statement = $GLOBALS['pdo']->prepare($query);
     $statement->execute([$taskName, $taskDesc, $taskID]);
@@ -75,6 +76,7 @@ function editTask($taskID, $taskName, $taskDesc){
     return true;
 }
 
+// would be used to mark an entry complete but image upload is broken
 function completeEntry($entryID, $data) {
     var_dump($_FILES);
 

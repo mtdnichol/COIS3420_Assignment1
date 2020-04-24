@@ -31,8 +31,8 @@ let uppy = Uppy.Core({
     })
     .use(Uppy.Webcam, { target: Uppy.Dashboard });
 
-// *****
 // MARK ITEM COMPLETE FUNCTION
+// take in item id and use uppy to upload photo
 function markItemComplete(itemID) {
     let date = document.querySelector(".item[data-item-id=\"" + itemID + "\"] #completedDate").value;
     uppy.upload().then(result => {
@@ -40,16 +40,19 @@ function markItemComplete(itemID) {
     });
 }
 
+// necessary function to get uppy working
 function resetUppy() {
     uppy.reset();
 }
 
-// *****
+
 // DELETE ITEM FUNCTION
+// take in item id, using that ping the api to have it deleted
 function deleteItem(itemID) {
     // delete on backend
     let url = "api.php?deleteEntry=" + itemID;
 
+    // attempt to ping api with item id
     fetch(url)
         .then(function (data) {
             // hide on front end
@@ -63,7 +66,7 @@ function deleteItem(itemID) {
     return true;
 }
 
-// *****
+
 // EDIT LIST FUNCTION
 
 // ran on click of edit title button
@@ -72,9 +75,8 @@ function titleSwap(){
     document.querySelector(".titleHeader").classList.toggle("hidden");
     document.querySelector(".titleEdit").classList.toggle("hidden");
 
-    let prevTitle = document.querySelector(".titleHeader h2").textContent;
-
     // set previous title as placeholder of current input
+    let prevTitle = document.querySelector(".titleHeader h2").textContent;
     document.querySelector(".titleEdit input").placeholder = prevTitle;
 
     return false;
@@ -109,6 +111,7 @@ function privacySwap(listID){
 
     let url = "api.php?privateSwap="+listID;
 
+    // ping api with listID to swap from private to public list
     fetch(url)
         .then(function(data){
             // do response
@@ -121,7 +124,7 @@ function privacySwap(listID){
     return false;
 }
 
-
+// javascript confirmation on deletion of list
 function confirmation(){
     let result = confirm("Want to Delete List?");
     if (!result){
@@ -129,7 +132,7 @@ function confirmation(){
     }
 }
 
-// description swap
+// description swap on click
 document.querySelector("#bucketDescription").addEventListener("click", function(){
     document.querySelector(".bucketDesc").classList.toggle("hidden");
     document.querySelector(".bucketEdit").classList.toggle("hidden");
@@ -145,7 +148,7 @@ document.querySelector("#descSubmit").addEventListener("click", function(){
     let newDesc = document.querySelector(".bucketEdit input").value;
     let oldDesc = document.querySelector(".bucketDesc p").textContent;
 
-    // update with database -- ajax call to api
+    // update with database -- ajax call to api. Why not use an XML request as well
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", "api.php?newDesc="+newDesc+"&oldDesc="+oldDesc, false);
     xhttp.send();
@@ -163,25 +166,30 @@ document.querySelector("#addTaskSubmit").addEventListener("click", function(){
 
 });
 
+
+// ADD TASK FUNCTION
+// takes in listID, ensures users have entered items into new user+desc and then
+// pings db with json file including that to have a new task added to the current list
 function addTask(listID){
     let failed = false;
-    console.log(listID);
-    // get new task name
+    // get new task name & ensure its set. If not glow red
     let taskName = document.querySelector("#nameEdit").value;
     if (taskName == "") {
         document.querySelector("#nameEdit").classList.toggle("wrongSelection");
         failed = true;
     }
-    // get description
+    // get description & ensure its set. If not glow red
     let taskDesc = document.querySelector("#descEdit").value;
     if (taskDesc == "") {
         document.querySelector("#descEdit").classList.toggle("wrongSelection");
         failed = true;
     }
 
+    // assuming both have been set, ping with list id
     if (!failed){
         var url = "api.php?addTask="+listID;
 
+        // and pass in json object including taskName, taskDesc, and an identifier
         fetch(url, {
             method: 'post',
             body: JSON.stringify({
@@ -202,19 +210,11 @@ function addTask(listID){
     }
 }
 
-function luckyAdd(listID){
-    // parse db for all entries
-
-    // random number generate between 0 & max
-
-    // select one and add it to this db table
-
-    // display for user
-}
-
+// EDIT TASK FUNCTION
+// takes in listID and taskID, ensures the edits have been set and then pings db with information
+// in json data to be edited.
 function editTask(listID, taskID){
     let failed = false;
-    console.log(listID);
     // get new task name
     let taskName = document.querySelector("#nameModify").value;
     console.log(taskName);
@@ -230,10 +230,11 @@ function editTask(listID, taskID){
         failed = true;
     }
 
-    console.log(failed);
+    // assuming both have been edited
     if (!failed){
         var url = "api.php?editTask="+listID;
 
+        // fetch with json data including taskID, taskName, taskDesc, and an identifier.
         fetch(url, {
             method: 'post',
             body: JSON.stringify({
@@ -253,5 +254,4 @@ function editTask(listID, taskID){
         // redirect -- temporary
         window.location.href="ManageList.php?id="+listID;
     }
-
 }
