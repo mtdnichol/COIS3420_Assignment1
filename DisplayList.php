@@ -4,7 +4,7 @@ require "./includes/library.php";
 require "./includes/util.php";
 
 if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
-    header("Location: Login.php");
+    header("Location: Login");
     exit();
 }
 

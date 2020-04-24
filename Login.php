@@ -4,6 +4,11 @@
 session_start(); //Does this do anything?  How do I clear session variables on logout?
 require "./includes/library.php";
 
+if ((isset($_SESSION['username']) && $_SESSION['username'] != '')) {
+    header("Location: Profile");
+    exit();
+}
+
 $errors = [];
 
 //Hidden input
