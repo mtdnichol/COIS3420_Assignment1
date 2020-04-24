@@ -479,6 +479,41 @@ div.large {
     max-width: 90%;
 }
 
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-label {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.icon-label input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
+.passtrengthMeter {
+    margin: 1rem;
+}
+
+.no-border {
+    border: none !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.centered-text {
+    text-align: center;
+}
+
 #backtoButton {
     text-decoration: none;
 }
@@ -520,8 +555,8 @@ div.main-splash {
     from {
         transform: rotate(0deg);
     } to{
-        transform: rotate(359deg);
-     }
+          transform: rotate(359deg);
+      }
 }
 
 .splashButtons {

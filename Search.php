@@ -75,7 +75,8 @@ $searchLine = empty($title) ? "Find all lists" : "Find lists associated with ".$
         });
     });
 
-    // Copies a string to the clipboard. TAKEN FROM STACK OVERFLOW
+    // TAKEN FROM STACK OVERFLOW
+    // Copies a string to the clipboard
     function copyToClipboard(text) {
         if (window.clipboardData && window.clipboardData.setData) {
             // Internet Explorer-specific code path to prevent textarea being shown while dialog is visible.

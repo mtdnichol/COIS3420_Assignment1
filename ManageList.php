@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "./includes/library.php";
+require "./includes/util.php";
 
 if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     header("Location: Login.php");
@@ -34,6 +35,11 @@ if (isset($_POST['deleteItem'])) {
 
 if (isset($_POST['exit'])) {
     header("Location: DisplayList.php");
+    exit();
+}
+
+if(!isOwner($curID)) {
+    header("Location: Login.php");
     exit();
 }
 ?>
