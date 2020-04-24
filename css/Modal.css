@@ -1,7 +1,7 @@
 .modal {
     display: none;
     position: fixed;
-    padding-top: 50px;
+    padding-top: 20vh;
     left: 0;
     top: 0;
     width: 100%;
@@ -14,7 +14,7 @@
     background-color: white;
     padding: 20px;
     margin: auto;
-    width: 75%;
+    max-width: 50%;
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
