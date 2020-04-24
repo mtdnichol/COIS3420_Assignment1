@@ -9,7 +9,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 }
 
 if(!isset($_GET['id']) || !is_int($_GET['id'])) {
-    // TODO error
+    header('Location:');
 }
 
 /* Connect to DB */
@@ -76,13 +76,24 @@ if(!isOwner($curID)) {
                     <div id="addItemModal" class="modal">
                         <div class="modal-content">
                             <span class="close-btn">&times;</span>
-                            <p>this is the text inside the modal</p>
+                            <div class="addModalContent">
+                                <label for="nameEdit" class="addLabel">Item Name</label>
+                                <input type="text" id="nameEdit">
+                            </div>
+                            <div class="addModalContent">
+                                <label for=descEdit" class="addLabel">Description</label>
+                                <textarea name="descEdit" id="descEdit" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="addModalContent">
+<!--                            temporarily refreshes instead of just adding to screen-->
+                                <a class="addSubmit" onclick="addTask(<?php echo $_GET['id'] ?>)">Submit</a>
+                            </div>
                         </div>
                     </div>
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
                         <button id="editList" name="editList" onclick="titleSwap(); return false;" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
                     </form>
-                    <form action="./Login" method="POST">
+                    <form action="Profile" method="POST">
                         <input type="hidden" name="listID" value="<?php echo $_GET['id'] ?>">
                         <button id="deleteList" name="deleteList" data-tippy-content="Delete List" onclick="return confirmation()"><i class="fas fa-trash-alt"></i></button>
                     </form>

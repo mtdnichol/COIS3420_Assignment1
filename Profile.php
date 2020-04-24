@@ -7,6 +7,8 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     exit();
 }
 
+$errors = [];
+
 /* Connect to DB */
 $pdo = connectDB();
 
@@ -15,7 +17,7 @@ $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
 $email = $statement->fetch();
 
-$query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ?";
+$query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ? ORDER BY title";
 $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
 $lists = $statement->fetchAll();
@@ -47,6 +49,31 @@ if (isset($_POST['submit'])) {
     header('Location: Login.php');
     exit();
 }
+
+if (isset($_POST['deleteList'])){
+    $listID = $_POST['listID'];
+
+    /* Connect to DB */
+    $pdo = connectDB();
+
+    // query to delete list matching id
+    $query = "DELETE FROM bucket_lists WHERE id=?";
+    $statement = $pdo->prepare($query);
+    $statement->execute([$listID]); // fill with passed in id
+}
+
+if (isset($_POST['completeCreation'])) {
+    $date = date("Y-m-d");
+    $private = 0;
+    if (!empty($_POST['privacy'])) {
+        $private = 1;
+    }
+
+    $query="INSERT INTO `bucket_lists`(`title`, `fk_userid`, `created`, `description`, `private`) VALUES (?,?,?,?,?)";
+    $statement = $pdo->prepare($query);
+    $statement->execute([$_POST['title'], $_SESSION['userID'], $date, $_POST['description'], $private]);
+    header("Refresh:0");
+}
 ?>
 
 <head>
@@ -64,6 +91,55 @@ if (isset($_POST['submit'])) {
         </div>
 
         <h3 class="space profileFormat">Your Bucket Lists</h3>
+
+        <div class="bucketListNav">
+            <button id="createList" data-open-modal="createListModal" name="createList" data-tippy-content="Create A List"><i class="fas fa-plus"></i></button>
+            <div id="createListModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn">&times;</span>
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="wide">
+                        <div class="addModalContent">
+                            <label for="title" class="addLabel">Title</label>
+                            <input id="title" name="title" type="text" placeholder="Title" required>
+                        </div>
+                        <div class="addModalContent">
+                            <label for=description" class="addLabel">Description</label>
+                            <textarea name="description" id="description" cols="30" rows="10" required></textarea>
+                        </div>
+                        <div>
+                            <label for="privacy"></i>Private</label>
+                            <input id="privacy" name="privacy" type="checkbox">
+                        </div>
+
+                        <button id="completeCreation" name="completeCreation" class="centered createButton">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+<!--            <div id="createListModal" class="modal">-->
+<!--                <div class="modal-content">-->
+<!--                    <span class="close-btn">&times;</span>-->
+<!---->
+<!--                    <form action="--><?//= $_SERVER['PHP_SELF'] ?><!--" method="POST">-->
+<!--                        <div>-->
+<!--                            <label for="title"></i>List Title</label>-->
+<!--                            <input id="title" name="title" type="text" placeholder="Title" required>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="description"></i>List Description</label>-->
+<!--                            <input id="description" name="description" type="text" placeholder="Description" required>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="privacy"></i>Private</label>-->
+<!--                            <input id="privacy" name="privacy" type="checkbox">-->
+<!--                        </div>-->
+<!---->
+<!--                        <button id="completeCreation" name="completeCreation" class="centered createButton">Submit</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+        </div>
+
         <table class="profile">
             <tr>
                 <th>List Name</th>
@@ -85,7 +161,7 @@ if (isset($_POST['submit'])) {
 
                     <td><?= $list['description'] ?></td>
                     <td><?= $list['created'] ?></td>
-                    <td><a href="<?php
+                    <td><a class="listLink" href="<?php
                         $currPath = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                         echo substr($currPath, 0, strrpos($currPath, '/')) . "/DisplayList?id=" . $list['id'];
                         ?>"><?php
@@ -103,4 +179,10 @@ if (isset($_POST['submit'])) {
 
 
     </div>
+
+    <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
 <?php include "./includes/footer.php"; ?>

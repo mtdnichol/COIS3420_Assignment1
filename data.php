@@ -47,6 +47,16 @@ function privacySwap($listID){
     return true;
 }
 
+//add task function
+function addTask($listID, $taskName, $taskDesc){
+    //get catagories from db
+    $query = "INSERT INTO bucket_entries(fk_listid, title, description) VALUES ('$listID', '$taskName', '$taskDesc')";
+    $statement = $GLOBALS['pdo']->prepare($query);
+    $statement->execute([]);
+
+    return true;
+}
+
 function deleteEntry($entryID) {
     $query = "DELETE FROM bucket_entries WHERE id = ?";
     $statement = $GLOBALS['pdo']->prepare($query);

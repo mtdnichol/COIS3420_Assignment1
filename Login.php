@@ -51,18 +51,6 @@ if (isset($_POST['submit'])) {
         $_POST['failed'] = true;
     }
 }
-
-if (isset($_POST['deleteList'])){
-    $listID = $_POST['listID'];
-
-    /* Connect to DB */
-    $pdo = connectDB();
-
-    // query to delete list matching id
-    $query = "DELETE FROM bucket_lists WHERE id=?";
-    $statement = $pdo->prepare($query);
-    $statement->execute([$listID]); // fill with passed in id
-}
 ?>
 
 <!DOCTYPE html>

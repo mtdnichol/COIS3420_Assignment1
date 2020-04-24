@@ -230,6 +230,11 @@ a.inline:visited {
     font-size: 1em;
 }
 
+button.createButton {
+    font-size: 1em;
+    margin: .3em;
+}
+
 button.centered {
     color: #3c3f41;
     margin-left: auto;
@@ -299,6 +304,8 @@ div.item p {
     -webkit-box-shadow: 0px 10px 16px -4px rgba(0,0,0,0.15);
     -moz-box-shadow: 0px 10px 16px -4px rgba(0,0,0,0.15);
     box-shadow: 0px 10px 16px -4px rgba(0,0,0,0.15);
+    position: fixed;
+    top: 0;
 }
 
 /* SEARCH BAR */
@@ -582,6 +589,8 @@ div.main-splash {
     color: black;
     letter-spacing: 2px;
     padding-top: 2%;
+
+    background-color: red;
 }
 
 
@@ -614,4 +623,106 @@ div.main-splash {
 
 .padding-right {
     padding-right: 1em;
+}
+
+.addSubmit {
+    height: 2.5vh;
+    width: 20vw;
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding: 1%;
+    font-size: 2em;
+
+    -webkit-transition: all ease 0.6s;
+    -moz-transition: all ease 0.6s;
+    transition: all ease 0.6s;
+    text-decoration: none;
+    color: black;
+}
+
+.addSubmit:hover{
+    box-shadow: inset 0 -200px 0 0 #000000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.addLabel {
+    font-size: 2em;
+    letter-spacing: 2px;
+    margin: auto 1vw;
+}
+
+#descEdit, #nameEdit, #title, #description{
+    width: 60%;
+}
+
+#descEdit, #description{
+    height: 30%;
+}
+
+.wrongSelection {
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(255,0,0,1);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(255,0,0,1);
+    box-shadow: 0px 0px 6px 0px rgba(255,0,0,1);
+}
+
+
+.addModalContent {
+    margin: 5% 0;
+    vertical-align: middle;
+}
+
+.addModalContent input, textarea {
+    border: 1px solid black;
+    padding: 1%;
+    letter-spacing: 1px;
+}
+
+.addModalContent input:focus, textarea:focus {
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.75);
+}
+
+a.toButton {
+    color: var(--accent-color);
+    font-weight: bold;
+    background-color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: 0.3s;
+    border: 2px solid var(--accent-color);
+    border-radius: 5px;
+}
+
+a.toButton:hover {
+    background-color: var(--accent-color);
+    color: white;
+    transition: 0.3s;
+}
+
+
+a.listLink {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+a.listLink:visited {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+a.listLink:focus {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+a.listLink:hover, a:active {
+    text-decoration: none;
+    color: #62749c;
+}
+
+form.wide {
+    width: 100%;
 }
