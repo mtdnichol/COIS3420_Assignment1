@@ -9,7 +9,6 @@ require "./includes/library.php";
 $errors = [];
 
 //Hidden input
-//If failed, action add some shit
 
 
 if (isset($_POST['submit'])) {

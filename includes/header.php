@@ -48,7 +48,7 @@ $userLists = $statement->fetchAll();
         <button class="dropbtn">My Bucket Lists</button>
         <div class="dropdown-content">
             <?php foreach ($userLists as $list): ?>
-                <a href="DisplayList.php" value="<?= $list['id'] ?>"><?= $list['title'] ?></a>
+                <a href="DisplayList" value="<?= $list['id'] ?>"><?= $list['title'] ?></a>
             <?php endforeach; ?>
         </div>
     </div>
@@ -58,7 +58,7 @@ $userLists = $statement->fetchAll();
     </div>
 
     <div class="user-buttons">
-        <a href="Login.php" id="logout">Logout</a>
-        <a href="Profile.php">Profile</a>
+        <a href="Login" id="logout">Logout</a>
+        <a href="Profile">Profile</a>
     </div>
 </div>
