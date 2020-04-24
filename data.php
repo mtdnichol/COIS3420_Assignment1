@@ -26,6 +26,17 @@ function titleUpdate($oldTitle, $newTitle){
     return true;
 }
 
+// description update function
+function descUpdate($oldDesc, $newDesc){
+
+    // get catagories from db
+    $query = "UPDATE bucket_lists SET description = ? WHERE description = ?";
+    $statement = $GLOBALS['pdo']->prepare($query);
+    $statement->execute([$newDesc, $oldDesc]);
+
+    return true;
+}
+
 // swap privacy of list
 function privacySwap($listID){
     //get catagories from db

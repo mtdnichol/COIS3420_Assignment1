@@ -23,12 +23,13 @@ $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
 $userLists = $statement->fetchAll();
 
-$query = "SELECT title, username FROM `bucket_lists` INNER JOIN bucket_users ON bucket_lists.fk_userid = bucket_users.id WHERE bucket_lists.id = ?";
+$query = "SELECT title, username, description FROM `bucket_lists` INNER JOIN bucket_users ON bucket_lists.fk_userid = bucket_users.id WHERE bucket_lists.id = ?";
 $statement = $pdo->prepare($query);
 $statement->execute([$curID]);
 $list = $statement->fetch();
 $username = $list['username'];
 $title = $list['title'];
+$description = $list['description'];
 
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
@@ -44,12 +45,12 @@ if (isset($_POST['deleteItem'])) {
 }
 
 if (isset($_POST['exit'])) {
-    header("Location: DisplayList.php");
+    header("Location: DisplayList");
     exit();
 }
 
 if(!isOwner($curID)) {
-    header("Location: Login.php");
+    header("Location: Login");
     exit();
 }
 ?>
@@ -57,7 +58,7 @@ if(!isOwner($curID)) {
 <!--html file starts-->
 <?php include "./includes/header.php"; ?>
     <div class="main-box">
-        <h1><?php echo $username ?>'s Bucket List</h1>
+        <h1><?php echo ucfirst($username) ?>'s Bucket List</h1>
         <div class="titleHeader">
             <h2><?php echo $title ?></h2>
         </div>
@@ -65,6 +66,15 @@ if(!isOwner($curID)) {
             <input type="text">
             <button id="titleSubmit">Submit</button>
         </div>
+
+        <div class="bucketDesc">
+            <p id="bucketDescription"><?php echo $description ?></p>
+        </div>
+        <div class="bucketEdit hidden">
+            <input type="text">
+            <button id="descSubmit">Submit</button>
+        </div>
+
 
         <div class="bucketListNav" style="">
             <div class="leftButtons">
@@ -91,7 +101,7 @@ if(!isOwner($curID)) {
                 <div class="button-horizontal">
                     <button class="<?php echo isPrivate($_GET['id']) ? "" : "hidden"?>" id="privatize" name="privatize" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Public"><i class="fa fa-lock"></i></button>
                     <button class="<?php echo isPrivate($_GET['id']) ? "hidden" : ""?>" id="privatize-lock" name="privatize-lock" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Private"><i class="fa fa-unlock"></i></button>
-                    <form id="exit-form" action="<?php echo "DisplayList.php?id=".$_GET['id']?>" method="POST">
+                    <form id="exit-form" action="<?php echo "DisplayList?id=".$_GET['id']?>" method="POST">
                         <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
                     </form>
                 </div>
@@ -100,8 +110,9 @@ if(!isOwner($curID)) {
         </div>
 
         <?php foreach ($results as $result): ?>
-            <form id="item-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+            <form id="<?php echo $result['id']?>" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
                 <input id="dbid" type="hidden" name="value" value="<?php $result['id'] ?>">
+
                 <div class ="item">
                     <div class="item-buttons">
                         <button id="markItem" class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>

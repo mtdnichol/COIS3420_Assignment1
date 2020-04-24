@@ -83,3 +83,32 @@ function confirmation(){
         return false;
     }
 }
+
+// description swap
+document.querySelector("#bucketDescription").addEventListener("click", function(){
+    document.querySelector(".bucketDesc").classList.toggle("hidden");
+    document.querySelector(".bucketEdit").classList.toggle("hidden");
+
+    let prevDesc = document.querySelector(".bucketDesc p").textContent;
+
+});
+
+// on submit button for description swap
+document.querySelector("#descSubmit").addEventListener("click", function(){
+    // grab text from input
+    console.log(document.querySelector(".bucketEdit input").value);
+    let newDesc = document.querySelector(".bucketEdit input").value;
+    let oldDesc = document.querySelector(".bucketDesc p").textContent;
+
+    // update with database -- ajax call to api
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "api.php?newDesc="+newDesc+"&oldDesc="+oldDesc, false);
+    xhttp.send();
+
+    // update title in page
+    document.querySelector(".bucketDesc p").textContent = newDesc;
+
+    // swap back headers
+    document.querySelector(".bucketDesc").classList.toggle("hidden");
+    document.querySelector(".bucketEdit").classList.toggle("hidden");
+});
