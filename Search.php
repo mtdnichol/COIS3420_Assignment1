@@ -2,6 +2,7 @@
 session_start();
 require "./includes/library.php";
 
+// Ensure user is logged in
 if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     header("Location: Login");
     exit();
@@ -10,6 +11,7 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 /* Connect to DB */
 $pdo = connectDB();
 
+// Handle pagination (this never made it into the UI, ran out of time)
 $page = 1;
 if(isset($_GET['page']) && is_int($_GET['page']) && (int)$_GET['page'] > 0) {
     $page = (int)$_GET['page'];
@@ -19,15 +21,20 @@ if(isset($_GET['per_page']) && is_int($_GET['per_page']) && (int)$_GET['per_page
     $per_page = (int)$_GET['per_page'];
 }
 
+// Calculate limit based on pagination values
 $min_limit = ($page - 1) * $per_page;
 $max_limit = $page * $per_page;
 
+// Search for the title provided in the url
 $title = $_GET['title'] ?? "";
 
+// Inner join users table here to display which user made which list
 $query = "SELECT bucket_lists.*, bucket_users.username FROM bucket_lists INNER JOIN bucket_users ON bucket_lists.fk_userid = bucket_users.id WHERE private = 0 AND title LIKE ? LIMIT ?,?";
 $statement = $pdo->prepare($query);
 $statement->execute(['%'.$title.'%', $min_limit, $max_limit]);
 $searchLists = $statement->fetchAll();
+
+// If title is empty, search for all lists
 $searchLine = empty($title) ? "Find all lists" : "Find lists associated with ".$title;
 ?>
 
@@ -60,6 +67,7 @@ $searchLine = empty($title) ? "Find all lists" : "Find lists associated with ".$
     <?php endforeach; ?>
 </div>
 <script>
+    // Upon clicking a list, go to its url
     window.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll(".list-info").forEach(node => {
             node.addEventListener('click', (event) => {
@@ -67,6 +75,7 @@ $searchLine = empty($title) ? "Find all lists" : "Find lists associated with ".$
             });
         });
 
+        // Upon clicking the copy button, copy its URL
         let dir = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
         document.querySelectorAll(".list-copy").forEach(node => {
             node.addEventListener("click", (event) => {
