@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "./includes/library.php";
+require "./includes/util.php";
 
 if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     header("Location: Login.php");
@@ -33,6 +34,11 @@ $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_li
 $statement = $pdo->prepare($query);
 $statement->execute([$curID]);
 $results = $statement->fetchAll();
+
+if(isPrivate($curID) && !isOwner($curID)) {
+    header("Location: Login.php");
+    exit();
+}
 ?>
 
 <!--html starts-->
@@ -41,7 +47,9 @@ $results = $statement->fetchAll();
         <h1><?php echo ucfirst($_SESSION['username'])?>'s Bucket List</h1>
         <h2><?php echo $title['title'] ?></h2>
         <div class="bucket-list-nav">
-            <a href="<?php echo "ManageList.php?id=".$_GET['id']?>" class="right"><i class="fas fa-tasks"></i> Manage</a>
+            <?php if(isOwner($curID)):?>
+                <a href="<?php echo "ManageList.php?id=".$_GET['id']?>" class="right"><i class="fas fa-tasks"></i> Manage</a>
+            <?php endif; ?>
         </div>
 
         <?php foreach ($results as $result): ?>
