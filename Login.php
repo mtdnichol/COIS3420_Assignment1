@@ -11,9 +11,6 @@ if ((isset($_SESSION['username']) && $_SESSION['username'] != '')) {
 
 $errors = [];
 
-//Hidden input
-
-
 if (isset($_POST['submit'])) {
     /* Process log-in request */
     $username = $_POST['username'];
@@ -38,10 +35,12 @@ if (isset($_POST['submit'])) {
         if(!empty($_POST["remember"])) {
             setcookie ("username",$_POST["username"],time()+ 3600);
             setcookie ("password",$_POST["password"],time()+ 3600);
+            setcookie ("checked", true, time()+ 3600);
             echo "Cookies Set Successfuly";
         } else {
             setcookie("username","");
             setcookie("password","");
+            setcookie ("checked", false, time()+ 3600);
             echo "Cookies Not Set";
         }
 
@@ -89,7 +88,11 @@ if (isset($_POST['deleteList'])){
                     <input id="password" name="password" type="password" placeholder="Password" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>">
                 </div>
                 <div>
-                    <input type="checkbox" id="remember">
+                    <?php if (isset($_COOKIE['checked']) && $_COOKIE['checked'] == true): ?>
+                        <input type="checkbox" id="remember" name="remember" checked>
+                    <?php else: ?>
+                        <input type="checkbox" id="remember" name="remember">
+                    <?php endif; ?>
                     <label for="remember">Remember me</label>
                 </div>
 
