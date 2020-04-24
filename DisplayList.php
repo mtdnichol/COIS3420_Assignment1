@@ -58,7 +58,6 @@ if(isPrivate($curID) && !isOwner($curID)) {
 
         <?php foreach ($results as $result): ?>
             <div class ="item">
-                <img src="<?= $result['photo'] ?>" alt="TestImage">
                 <div class="bucket-content">
                     <h3><?= $result['title'] ?></h3>
                     <p><?= $result['description'] ?></p>

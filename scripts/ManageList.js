@@ -186,7 +186,8 @@ function addTask(listID){
             method: 'post',
             body: JSON.stringify({
                 taskName: taskName,
-                taskDesc: taskDesc
+                taskDesc: taskDesc,
+                addTask: true
             })
         })
             .then(function(data){
@@ -197,9 +198,60 @@ function addTask(listID){
             });
 
         // redirect -- temporary
-        window.location.href="ManageList.php?=id="+listID;
+        window.location.href="ManageList.php?id="+listID;
     }
-
-
 }
 
+function luckyAdd(listID){
+    // parse db for all entries
+
+    // random number generate between 0 & max
+
+    // select one and add it to this db table
+
+    // display for user
+}
+
+function editTask(listID, taskID){
+    let failed = false;
+    console.log(listID);
+    // get new task name
+    let taskName = document.querySelector("#nameModify").value;
+    console.log(taskName);
+    if (taskName == "") {
+        document.querySelector("#nameEdit").classList.toggle("wrongSelection");
+        failed = true;
+    }
+    // get description
+    let taskDesc = document.querySelector("#descModify").value;
+    console.log(taskDesc);
+    if (taskDesc == "") {
+        document.querySelector("#descEdit").classList.toggle("wrongSelection");
+        failed = true;
+    }
+
+    console.log(failed);
+    if (!failed){
+        var url = "api.php?editTask="+listID;
+
+        fetch(url, {
+            method: 'post',
+            body: JSON.stringify({
+                taskID: taskID,
+                taskName: taskName,
+                taskDesc: taskDesc,
+                editTask: true
+            })
+        })
+            .then(function(data){
+                console.log(data.text().then(text => console.log(text)));
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+
+        // redirect -- temporary
+        window.location.href="ManageList.php?id="+listID;
+    }
+
+}

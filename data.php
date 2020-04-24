@@ -67,6 +67,15 @@ function deleteEntry($entryID) {
     return true;
 }
 
+// Edit a bucket list entry and replace its contents given by the params
+function editTask($taskID, $taskName, $taskDesc){
+    $query = "UPDATE bucket_entries SET title=?, description=? WHERE id = ?";
+    $statement = $GLOBALS['pdo']->prepare($query);
+    $statement->execute([$taskName, $taskDesc, $taskID]);
+
+    return true;
+}
+
 // would be used to mark an entry complete but image upload is broken
 function completeEntry($entryID, $data) {
     var_dump($_FILES);

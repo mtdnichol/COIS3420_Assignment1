@@ -126,10 +126,26 @@ if(!isOwner($curID)) {
                             <p id="uploadErrors"></p>
                         </div>
                     </div>
-                    <button id="editItem" class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
+                    <button data-open-modal="editItemModal" id="editItem" class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
+                    <div id="editItemModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn">&times;</span>
+                            <div class="addModalContent">
+                                <label for="nameModify" class="editLabel">New Name</label>
+                                <input type="text" id="nameModify">
+                            </div>
+                            <div class="addModalContent">
+                                <label for=descModify" class="editLabel">Description</label>
+                                <textarea name="descEdit" id="descModify" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="addModalContent">
+                                <!--                            temporarily refreshes instead of just adding to screen-->
+                                <a class="editSubmit" onclick="editTask(<?php echo $_GET['id'] ?>, <?php echo $result['id'] ?>)">Submit</a>
+                            </div>
+                        </div>
+                    </div>
                     <button id="deleteItem" class="deleteItem" name="deleteItem" data-tippy-content="Delete Item" onclick="return deleteItem('<?php echo $result['id'] ?>');"><i class="fas fa-trash-alt"></i></button>
                 </div>
-                <img src="<?= $result['photo'] ?>" alt="TestImage">
                 <div class="bucket-content" id="<?= $result['id'] ?>">
                     <h3><?= $result['title'] ?></h3>
                     <p><?= $result['description'] ?></p>

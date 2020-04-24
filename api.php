@@ -38,12 +38,20 @@ if(!empty($_GET['newDesc']) && !empty($_GET['oldDesc'])){
 $data = json_decode(file_get_contents('php://input'), true);
 
 if (!empty($data)){
-    if ($data['taskName'] != NULL && $data['taskDesc'] != NULL){
+    // for adding a new task
+    if (isset($data['addTask'])){
 
         // run add task function
         addTask($_GET['addTask'], $data['taskName'], $data['taskDesc']);
         // response say completed
-        response(200, "task ran", NULL);
+        response(200, "Task Added", NULL);
+    }
+
+    // edit task route
+    if(isset($data['editTask']) == true){
+        editTask($data['taskID'], $data['taskName'], $data['taskDesc']);
+
+        response(200, "Task Edited", NULL);
     }
 }
 
@@ -57,5 +65,3 @@ if(!empty($_GET['deleteEntry'])){
 if(!empty($_GET['completeEntry'])) {
     if(completeEntry($_GET['completeEntry'], $_POST)) response(200, "Entry Marked Complete", NULL);
 }
-
-
