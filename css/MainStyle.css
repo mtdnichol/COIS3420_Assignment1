@@ -625,7 +625,7 @@ div.main-splash {
 
 .editSubmit {
     height: 2.5vh;
-    width: 10vw;
+    width: 20vw;
     text-align: center;
     border-bottom: 1px solid black;
     padding: 1%;
@@ -645,7 +645,7 @@ div.main-splash {
 .addLabel {
     font-size: 2em;
     letter-spacing: 2px;
-    margin-right: 1%;
+    margin: auto 1vw;
 }
 
 #descEdit, #nameEdit {
