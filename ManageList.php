@@ -84,7 +84,8 @@ if(!isOwner($curID)) {
                                 <textarea name="descEdit" id="descEdit" cols="30" rows="10"></textarea>
                             </div>
                             <div class="addModalContent">
-                                <a class="editSubmit" onclick="addTask(<?php echo $_GET['id'] ?>)">Submit</a>
+<!--                            temporarily refreshes instead of just adding to screen-->
+                                <a class="addSubmit" onclick="addTask(<?php echo $_GET['id'] ?>)">Submit</a>
                             </div>
                         </div>
                     </div>

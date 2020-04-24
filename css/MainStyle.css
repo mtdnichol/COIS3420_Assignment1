@@ -304,6 +304,8 @@ div.item p {
     -webkit-box-shadow: 0px 10px 16px -4px rgba(0,0,0,0.15);
     -moz-box-shadow: 0px 10px 16px -4px rgba(0,0,0,0.15);
     box-shadow: 0px 10px 16px -4px rgba(0,0,0,0.15);
+    position: fixed;
+    top: 0;
 }
 
 /* SEARCH BAR */
@@ -623,7 +625,7 @@ div.main-splash {
     padding-right: 1em;
 }
 
-.editSubmit {
+.addSubmit {
     height: 2.5vh;
     width: 20vw;
     text-align: center;
@@ -634,9 +636,11 @@ div.main-splash {
     -webkit-transition: all ease 0.6s;
     -moz-transition: all ease 0.6s;
     transition: all ease 0.6s;
+    text-decoration: none;
+    color: black;
 }
 
-.editSubmit:hover{
+.addSubmit:hover{
     box-shadow: inset 0 -200px 0 0 #000000;
     color: #fff;
     cursor: pointer;
@@ -655,6 +659,13 @@ div.main-splash {
 #descEdit {
     height: 30%;
 }
+
+.wrongSelection {
+    -webkit-box-shadow: 0px 0px 6px 0px rgba(255,0,0,1);
+    -moz-box-shadow: 0px 0px 6px 0px rgba(255,0,0,1);
+    box-shadow: 0px 0px 6px 0px rgba(255,0,0,1);
+}
+
 
 .addModalContent {
     margin: 5% 0;

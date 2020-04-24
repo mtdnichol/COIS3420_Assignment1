@@ -120,27 +120,42 @@ document.querySelector("#addTaskSubmit").addEventListener("click", function(){
 });
 
 function addTask(listID){
+    let failed = false;
     console.log(listID);
     // get new task name
     let taskName = document.querySelector("#nameEdit").value;
-    console.log(taskName);
+    if (taskName == "") {
+        document.querySelector("#nameEdit").classList.toggle("wrongSelection");
+        failed = true;
+    }
     // get description
     let taskDesc = document.querySelector("#descEdit").value;
-    console.log(taskDesc);
+    if (taskDesc == "") {
+        document.querySelector("#descEdit").classList.toggle("wrongSelection");
+        failed = true;
+    }
 
-    var url = "api.php?addTask="+listID;
+    if (!failed){
+        var url = "api.php?addTask="+listID;
 
-    fetch(url, {
-        method: 'post',
-        body: JSON.stringify({
-            taskName: taskName,
-            taskDesc: taskDesc
+        fetch(url, {
+            method: 'post',
+            body: JSON.stringify({
+                taskName: taskName,
+                taskDesc: taskDesc
+            })
         })
-    })
-        .then(function(data){
-            console.log(data.text().then(text => console.log(text)));
-        })
-        .catch(function(error){
-            console.log(error);
-        });
+            .then(function(data){
+                console.log(data.text().then(text => console.log(text)));
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+
+        // redirect -- temporary
+        window.location.href="ManageList.php?=id="+listID;
+    }
+
+
 }
+
