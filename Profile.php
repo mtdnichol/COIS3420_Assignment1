@@ -86,43 +86,43 @@ if (isset($_POST['completeCreation'])) {
 <!-- HTML Starts -->
 <?php include "./includes/header.php"; ?>
     <div class="main-box large">
-        <h1><?php echo ucfirst($_SESSION['username'])?>'s Profile</h1>
+        <h1><?php echo ucfirst($_SESSION['username'])?>'s Profile</h1> <!-- Loads the username into the title -->
 
         <div class="leftAlignText">
-            <h3 class="profileFormat">Account Details</h3>
+            <h3 class="profileFormat">Account Details</h3> <!-- Displays the users account details, such as email and password -->
             <p><b>Username</b>: <?php echo $_SESSION['username']?></p>
             <p><b>E-mail</b>: <?php echo $email['email']?></p>
         </div>
 
         <h3 class="space profileFormat">Your Bucket Lists</h3>
 
-        <div class="bucketListNav">
+        <div class="bucketListNav"> <!-- Nav bar which contains the create list button -->
             <button id="createList" data-open-modal="createListModal" name="createList" data-tippy-content="Create A List"><i class="fas fa-plus"></i></button>
-            <div id="createListModal" class="modal">
+            <div id="createListModal" class="modal"> <!-- Creates a modal where the user can enter their new list information -->
                 <div class="modal-content">
                     <span class="close-btn">&times;</span>
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="wide">
                         <div class="addModalContent">
                             <label for="title" class="addLabel">Title</label>
-                            <input id="title" name="title" type="text" placeholder="Title" required>
+                            <input id="title" name="title" type="text" placeholder="Title" required> <!-- Title, required before form submission -->
                         </div>
                         <div class="addModalContent">
-                            <label for=description" class="addLabel">Description</label>
+                            <label for=description" class="addLabel">Description</label> <!-- Description, required before form submission -->
                             <textarea name="description" id="description" cols="30" rows="10" required></textarea>
                         </div>
                         <div>
-                            <label for="privacy"></i>Private</label>
+                            <label for="privacy"></i>Private</label> <!-- Allows the user to select if they want their list private or public -->
                             <input id="privacy" name="privacy" type="checkbox">
                         </div>
 
-                        <button id="completeCreation" name="completeCreation" class="centered createButton">Submit</button>
+                        <button id="completeCreation" name="completeCreation" class="centered createButton">Submit</button> <!-- Completes and processes the form -->
                     </form>
                 </div>
             </div>
         </div>
 
         <table class="profile">
-            <tr>
+            <tr> <!-- Table which displays all of the users lists and relevant information -->
                 <th>List Name</th>
                 <th>Privacy Setting</th>
                 <th>Description</th>
@@ -130,21 +130,22 @@ if (isset($_POST['completeCreation'])) {
                 <th>Link</th>
             </tr>
 
-            <?php foreach ($lists as $list): ?>
+            <?php foreach ($lists as $list): ?> <!-- Iterates over each gathered list -->
                 <tr>
-                    <td><?= $list['title'] ?></td>
+                    <td><?= $list['title'] ?></td> <!-- Title -->
 
-                    <?php if ($list['private'] == 0): ?>
+                    <?php if ($list['private'] == 0): ?> <!-- Privacy setting, displayed in text rather than 0,1 which is stored in the database -->
                         <td>Public</td>
                     <?php else: ?>
                         <td>Private</td>
                     <?php endif ?>
 
-                    <td><?= $list['description'] ?></td>
-                    <td><?= $list['created'] ?></td>
-                    <td><a class="listLink" href="<?php
+                    <td><?= $list['description'] ?></td> <!-- Description -->
+                    <td><?= $list['created'] ?></td> <!-- Date created -->
+                    <td><a class="listLink" href="<?php //Creates a link based on the current URL, appends necessary text to create the link
                         $currPath = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                         echo substr($currPath, 0, strrpos($currPath, '/')) . "/DisplayList?id=" . $list['id'];
+                        //Removes the last portion of the link, and replaces it with displaylist with an associated ID
                         ?>"><?php
                             $currPath = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                             echo substr($currPath, 0, strrpos($currPath, '/')) . "/DisplayList?id=" . $list['id'];
@@ -154,14 +155,14 @@ if (isset($_POST['completeCreation'])) {
         </table>
 
         <h3 class="space profileFormat">Other Operations</h3>
-        <form id="delete-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" onsubmit="getConfirmation()">
+        <form id="delete-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" onsubmit="getConfirmation()"> <!-- Allows the user to delete their account, confirms with JS validation in a popup alert -->
             <button id="submit" name="submit" class="delete">Delete Account</button>
         </form>
 
 
     </div>
 
-    <script>
+    <script> //This JS prevents the page from resubmitting the form on refresh, or form submission
         if ( window.history.replaceState ) {
             window.history.replaceState( null, null, window.location.href );
         }
