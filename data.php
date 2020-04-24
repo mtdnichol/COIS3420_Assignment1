@@ -46,3 +46,11 @@ function privacySwap($listID){
 
     return true;
 }
+
+function deleteEntry($entryID) {
+    $query = "DELETE FROM bucket_entries WHERE id = ?";
+    $statement = $GLOBALS['pdo']->prepare($query);
+    $statement->execute([$entryID]);
+
+    return true;
+}

@@ -33,3 +33,11 @@ if(!empty($_GET['newDesc']) && !empty($_GET['oldDesc'])){
         response(200, "Description Updated", NULL);
     }
 }
+
+// Delete item route
+if(!empty($_GET['deleteEntry'])){
+    if (deleteEntry($_GET['deleteEntry'])){
+        response(200, "Entry Deleted", NULL);
+    }
+}
+
