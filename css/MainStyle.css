@@ -599,3 +599,7 @@ div.main-splash {
 .headerBG h4 {
     letter-spacing: 2px;
 }
+
+.padding-right {
+    padding-right: 1em;
+}

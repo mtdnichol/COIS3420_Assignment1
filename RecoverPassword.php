@@ -79,7 +79,7 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <div class="icon-label">
-                    <label for="username"><i class="fas fa-lock"></i></i></label>
+                    <label for="username"><i class="fas fa-lock padding-right"></i></i></label>
                     <input id="password-check" name="password-check" type="password" placeholder="Retype New Password" class="no-margin">
                 </div>
 
