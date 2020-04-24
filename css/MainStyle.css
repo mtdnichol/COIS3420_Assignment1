@@ -173,7 +173,7 @@ h3.profileFormat {
     border-right: 2px solid #b3b3b3;
 }
 
-.item-buttons button {
+.item-buttons > button {
     padding: 5px;
     display: flex;
     background: none;

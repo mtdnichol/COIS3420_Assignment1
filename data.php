@@ -54,3 +54,9 @@ function deleteEntry($entryID) {
 
     return true;
 }
+
+function completeEntry($entryID, $data) {
+    var_dump($_FILES);
+
+    return true;
+}
