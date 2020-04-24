@@ -7,6 +7,22 @@ if (!(isset($_SESSION['username']) && $_SESSION['username'] != '')) {
     exit();
 }
 
+if (isset($_POST['deleteList'])){
+    $listID = $_POST['listID'];
+
+    /* Connect to DB */
+    $pdo = connectDB();
+
+    //Delete all entries
+    $query = "DELETE FROM bucket_entries WHERE fk_listid=?";
+    $statement = $pdo->prepare($query);
+    $statement->execute([$listID]); // fill with passed in id
+
+    $query = "DELETE FROM bucket_lists WHERE id=?";
+    $statement = $pdo->prepare($query);
+    $statement->execute([$listID]); // fill with passed in id
+}
+
 $errors = [];
 
 /* Connect to DB */
@@ -48,18 +64,6 @@ if (isset($_POST['submit'])) {
 
     header('Location: Login.php');
     exit();
-}
-
-if (isset($_POST['deleteList'])){
-    $listID = $_POST['listID'];
-
-    /* Connect to DB */
-    $pdo = connectDB();
-
-    // query to delete list matching id
-    $query = "DELETE FROM bucket_lists WHERE id=?";
-    $statement = $pdo->prepare($query);
-    $statement->execute([$listID]); // fill with passed in id
 }
 
 if (isset($_POST['completeCreation'])) {
@@ -115,29 +119,6 @@ if (isset($_POST['completeCreation'])) {
                     </form>
                 </div>
             </div>
-
-<!--            <div id="createListModal" class="modal">-->
-<!--                <div class="modal-content">-->
-<!--                    <span class="close-btn">&times;</span>-->
-<!---->
-<!--                    <form action="--><?//= $_SERVER['PHP_SELF'] ?><!--" method="POST">-->
-<!--                        <div>-->
-<!--                            <label for="title"></i>List Title</label>-->
-<!--                            <input id="title" name="title" type="text" placeholder="Title" required>-->
-<!--                        </div>-->
-<!--                        <div>-->
-<!--                            <label for="description"></i>List Description</label>-->
-<!--                            <input id="description" name="description" type="text" placeholder="Description" required>-->
-<!--                        </div>-->
-<!--                        <div>-->
-<!--                            <label for="privacy"></i>Private</label>-->
-<!--                            <input id="privacy" name="privacy" type="checkbox">-->
-<!--                        </div>-->
-<!---->
-<!--                        <button id="completeCreation" name="completeCreation" class="centered createButton">Submit</button>-->
-<!--                    </form>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
 
         <table class="profile">
