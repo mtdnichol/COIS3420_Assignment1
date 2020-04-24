@@ -46,7 +46,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $username;
         $_SESSION['userID'] = $results['id'];
 
-        // redirecting back to pfoile
+        // redirecting back to profile
         header("Location: Profile");
         exit();
     }
@@ -72,19 +72,19 @@ if (isset($_POST['submit'])) {
     <div class="main-box">
         <h1>Account Recovery</h1>
         <div class="login-box">
-            <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Redirect to DisplayList.html upon completion -->
+            <form id="main-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Form where the user enters their username, and a new password -->
                 <div class="icon-label">
                     <label for="username"><i class="fas fa-user"></i></i></label>
-                    <input id="username" name="username" type="text" placeholder="Username">
+                    <input id="username" name="username" type="text" placeholder="Username"> <!-- User enters their username -->
                 </div>
 
                 <div class="icon-label">
                     <label for="username"><i class="fas fa-lock"></i></i></label>
-                    <input id="password" name="password" type="password" placeholder="New Password" class="no-border no-margin">
+                    <input id="password" name="password" type="password" placeholder="New Password" class="no-border no-margin"> <!-- User enters their password -->
                 </div>
 
                 <div class="icon-label">
-                    <label for="username"><i class="fas fa-lock padding-right"></i></i></label>
+                    <label for="username"><i class="fas fa-lock padding-right"></i></i></label> <!-- Re enter password -->
                     <input id="password-check" name="password-check" type="password" placeholder="Retype New Password" class="no-margin">
                 </div>
 
@@ -96,7 +96,7 @@ if (isset($_POST['submit'])) {
             </form>
         </div>
     </div>
-    <script type="text/javascript" src="scripts/jquery.passtrength.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.passtrength.min.js"></script> <!-- This script is used to implement the password strength plugin on the users input -->
     <script>
         $('#password').passtrength({
             passwordToggle:false,

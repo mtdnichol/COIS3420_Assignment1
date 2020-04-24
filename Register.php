@@ -41,18 +41,18 @@ if (isset($_POST['submit'])) {
         $valid = false;
     }
 
-    if ($valid) {
+    if ($valid) { //If the entered passwords match, and the username isn't already taken, continue with hashing the password
         $options = ['cost' => 12];
-        $password = password_hash($password, PASSWORD_DEFAULT, $options);
+        $password = password_hash($password, PASSWORD_DEFAULT, $options); //Hash the password and store it in the database
 
         $query = "INSERT INTO bucket_users (username, password, email) VALUES (?,?,?)";
         $statement = $pdo->prepare($query);
         $statement->execute([ $username, $password, $email ]);
 
-        $_SESSION['username'] = $username;
-        $_SESSION['userID'] = $pdo->lastInsertId();
+        $_SESSION['username'] = $username; //Gets necessary session variables
+        $_SESSION['userID'] = $pdo->lastInsertId(); //Gets the last inserted ID from the database, which should associate with the just added user
 
-        header("Location: Profile");
+        header("Location: Profile"); //Redirects the user to their profile page
         exit();
     }
 }
@@ -73,41 +73,41 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="main-box">
         <h1>Register</h1>
-        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
+        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Form for the user to enter their credentials upon registration -->
             <div class="row">
                 <div class="icon-label">
-                    <label for="email"><i class="fas fa-envelope"></i></label>
+                    <label for="email"><i class="fas fa-envelope"></i></label> <!-- Email -->
                     <input id="email" name="email" type="text" placeholder="E-mail">
                 </div>
                 <div class="icon-label">
-                    <input id="username" name="username" type="text" placeholder="Username">
+                    <input id="username" name="username" type="text" placeholder="Username"> <!-- Username -->
                     <label for="username"><i class="fas fa-user"></i></label>
                 </div>
             </div>
             <div class="row">
                 <div class="icon-label">
-                    <label for="password" ><i class="fas fa-lock"></i></label>
+                    <label for="password" ><i class="fas fa-lock"></i></label> <!-- Password -->
                     <input id="password" name="password" type="password" placeholder="Password" autocomplete="password" class="no-border no-margin">
                 </div>
                 <div class="icon-label">
-                    <input id="password-check" name="password-check" type="password" placeholder="Re-type Password" autocomplete="password">
+                    <input id="password-check" name="password-check" type="password" placeholder="Re-type Password" autocomplete="password"> <!-- Password to be verified -->
                     <label for="password-check"><i class="fas fa-lock"></i></label>
                 </div>
             </div>
             <div class="centered-text">
-                <?php foreach ($errors as $error): ?>
+                <?php foreach ($errors as $error): ?> <!-- Outputs all submission errors, if any -->
                     <p><?= $error ?></p>
                 <?php endforeach; ?>
             </div>
             <div class="row">
-                <button id="submit" name="submit" class="centered">Register</button>
+                <button id="submit" name="submit" class="centered">Register</button> <!-- Submit the registration button -->
             </div>
         </form>
     </div>
-    <a href="Login" id="backtoButton">
+    <a href="Login" id="backtoButton"> <!-- Link to go back to login, if required -->
         <button id="login" name="login" class="centered">Back to Login</button>
     </a>
-    <script type="text/javascript" src="scripts/jquery.passtrength.min.js"></script>
+    <script type="text/javascript" src="scripts/jquery.passtrength.min.js"></script> <!-- Script for password strength plugin -->
     <script>
         $('#password').passtrength({
             passwordToggle:false,
