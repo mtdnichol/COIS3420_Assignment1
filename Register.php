@@ -77,7 +77,7 @@ if (isset($_POST['submit'])) {
 <body>
     <div class="main-box">
         <h1>Register</h1>
-        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST"> <!-- Redirect to DisplayList.php -->
+        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
             <div class="row">
                 <div class="icon-label">
                     <label for="email"><i class="fas fa-envelope"></i></label>
