@@ -79,8 +79,8 @@ if(!isOwner($curID)) {
             </div>
             <div class="rightButtons">
                 <div class="button-horizontal">
-                    <button class="hidden" id="privatize-lock" name="privatize-lock" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Private"><i class="fa fa-unlock"></i></button>
-                    <button id="privatize" name="privatize" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make UnPrivate"><i class="fa fa-lock"></i></button>
+                    <button class="<?php echo isPrivate($_GET['id']) ? "" : "hidden"?>" id="privatize" name="privatize" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Public"><i class="fa fa-lock"></i></button>
+                    <button class="<?php echo isPrivate($_GET['id']) ? "hidden" : ""?>" id="privatize-lock" name="privatize-lock" onclick="return privacySwap('<?php echo $_GET['id'] ?>');" data-tippy-content="Make Private"><i class="fa fa-unlock"></i></button>
                     <form id="exit-form" action="<?php echo "DisplayList.php?id=".$_GET['id']?>" method="POST">
                         <button id="exit" name="exit"><i class="fas fa-sign-out-alt"></i> Exit</button>
                     </form>
@@ -99,7 +99,7 @@ if(!isOwner($curID)) {
                         <button class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
                     </div>
                     <img src="<?= $result['photo'] ?>" alt="TestImage">
-                    <div class="bucket-content" value="<?= $result['id'] ?>">
+                    <div class="bucket-content" id="<?= $result['id'] ?>">
                         <h3><?= $result['title'] ?></h3>
                         <p><?= $result['description'] ?></p>
                     </div>

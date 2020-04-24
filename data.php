@@ -1,13 +1,26 @@
 <?php
 require "./includes/library.php";
+$pdo = connectDB();
+
+// Return a JSON rsponse to the user
+function response($status, $status_message, $data) {
+    header("Content-Type:application/json");
+    header("HTTP/1.1 ".$status);
+
+    $response['status']=$status;
+    $response['status_message']=$status_message;
+    $response['data']=$data;
+
+    $json_response = json_encode($response);
+    echo $json_response;
+}
 
 // title update function
 function titleUpdate($oldTitle, $newTitle){
-    $pdo = connectDB();
 
     // get catagories from db
     $query = "UPDATE bucket_lists SET title = ? WHERE title = ?";
-    $statement = $pdo->prepare($query);
+    $statement = $GLOBALS['pdo']->prepare($query);
     $statement->execute([$newTitle, $oldTitle]);
 
     return true;
@@ -15,12 +28,9 @@ function titleUpdate($oldTitle, $newTitle){
 
 // swap privacy of list
 function privacySwap($listID){
-    console.log("Privacy Swap");
-    $pdo = connectDB();
-
-    // get catagories from db
+    //get catagories from db
     $query = "UPDATE bucket_lists SET private = NOT private WHERE id=?";
-    $statement = $pdo->prepare($query);
+    $statement = $GLOBALS['pdo']->prepare($query);
     $statement->execute([$listID]);
 
     return true;

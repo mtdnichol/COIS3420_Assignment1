@@ -44,7 +44,7 @@ document.querySelector("#titleSubmit").addEventListener("click", function(){
 
     // update with database -- ajax call to api
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "./api.php?newTitle="+newTitle+"&oldTitle="+oldTitle, false);
+    xhttp.open("GET", "api.php?newTitle="+newTitle+"&oldTitle="+oldTitle, false);
     xhttp.send();
 
     // update title in page
@@ -57,27 +57,24 @@ document.querySelector("#titleSubmit").addEventListener("click", function(){
 
 // *****
 // PRIVACY SWAP FUNCTION
-function privacySwap($listID){
+function privacySwap(listID){
     // swap to lock buttons
     document.querySelector("#privatize ").classList.toggle("hidden");
     document.querySelector("#privatize-lock").classList.toggle("hidden");
 
-    var url = "./api.php?privateSwap="+$listID;
+    var url = "api.php?privateSwap="+listID;
 
     fetch(url)
         .then(function(data){
             // do response
-            console.log(data);
+            console.log(data.text().then(text => console.log(text)));
         })
         .catch(function(error){
             console.log(error);
         });
-
-
-
+    
     return false;
 }
-
 
 
 function confirmation(){
