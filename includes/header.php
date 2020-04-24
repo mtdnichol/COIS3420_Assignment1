@@ -2,6 +2,7 @@
 /* Connect to DB */
 $pdo = connectDB();
 
+//get userID and title from database to use in file later.
 $query = "SELECT id, title FROM `bucket_lists` WHERE fk_userid = ?";
 $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
@@ -26,12 +27,13 @@ $userLists = $statement->fetchAll();
             integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
             crossorigin="anonymous"></script>
     <script src="scripts/Modal.js"></script>
+    <!--Search bar script-->
     <script>
         window.addEventListener('DOMContentLoaded', () => {
+            //grab search input and add event listener on release of key
             let input = document.getElementById("list-search");
             input.addEventListener("keyup", function(event) {
                 // Number 13 is the "Enter" key on the keyboard
-                console.log(event.key);
                 if (event.key === "Enter") {
                     event.preventDefault();
                     if(event.target.value === "") {
@@ -41,7 +43,7 @@ $userLists = $statement->fetchAll();
                     }
                 }
             });
-
+            //im feeling lucky search, will display list with a random ID
             document.querySelector(".search i").addEventListener('click', (event) => {
                 document.location.href = "DisplayList?id=random"
             });
@@ -53,6 +55,7 @@ $userLists = $statement->fetchAll();
     <div class="dropdown">
         <button class="dropbtn">My Bucket Lists</button>
         <div class="dropdown-content">
+            <!-- Iterate through bucket list that the user has, and display it-->
             <?php foreach ($userLists as $list): ?>
                 <a href="DisplayList?id=<?= $list['id'] ?>" value="<?= $list['id'] ?>"><?= $list['title'] ?></a>
             <?php endforeach; ?>
