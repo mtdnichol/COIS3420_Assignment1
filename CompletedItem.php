@@ -19,13 +19,13 @@ $statement = $pdo->prepare($query);
 $statement->execute([$curID]);
 $result = $statement->fetch();
 ?>
-
+    <!-- This page displays data of a completed item -->
 <?php include "./includes/header.php"; ?>
     <div class="main-box">
-        <a class="toButton" href="<?= "DisplayList?id=".$result['fk_listid'] ?>">Back to List</a>
+        <a class="toButton" href="<?= "DisplayList?id=".$result['fk_listid'] ?>">Back to List</a> <!-- Link back to display list page -->
 
         <h2>Congratulations on your completed item!</h2>
-        <h3>Completed on: <?= $result['dateCompleted'] ?></h3>
+        <h3>Completed on: <?= $result['dateCompleted'] ?></h3> <!-- All information from a completed item is displayed to the user -->
         <img src="<?= $result['photo'] ?>" alt="TestImage">
         <h3><?= $result['title'] ?></h3>
         <p><?= $result['description'] ?></p>

@@ -61,11 +61,12 @@ $userLists = $statement->fetchAll();
             <?php endforeach; ?>
         </div>
     </div>
-    <div class="search">
+    <div class="search"> <!-- Search bar -->
         <input id="list-search" type="text" placeholder="&#xF002;    Search..." style="font-family:'Roboto', FontAwesome,serif">
         <i class="fas fa-magic" data-tippy-content="I'm Feeling Lucky"></i>
     </div>
 
+    <!-- Other functional buttons -->
     <div class="user-buttons">
         <a href="Logout" id="logout">Logout</a>
         <a href="Profile">Profile</a>

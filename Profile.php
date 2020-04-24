@@ -47,7 +47,7 @@ if (isset($_POST['submit'])) {
 
     //Deletes all of the entries in the lists the user is associated with
     foreach ($userLists as $list) {
-        $query = "DELETE FROM `bucket_entries` WHERE fk_list=?";
+        $query = "DELETE FROM `bucket_entries` WHERE fk_listid=?";
         $statement = $pdo->prepare($query);
         $statement->execute([$list['id']]);
     }
@@ -62,7 +62,7 @@ if (isset($_POST['submit'])) {
     $statement = $pdo->prepare($query);
     $statement->execute([$_SESSION['userID']]);
 
-    header('Location: Login.php');
+    header('Location: Logout.php');
     exit();
 }
 
