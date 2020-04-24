@@ -1,22 +1,23 @@
 "use strict";
 
-//https://www.youtube.com/watch?v=gLWIYk0Sd38 Modal source
-window.addEventListener('DOMContentLoaded', () => {
-    const markCompleteButtons = document.querySelectorAll("button[name=markItem]");
-    const deleteItemButtons = document.querySelectorAll("button[name=deleteItem]")
+// *****
+// DELETE ITEM FUNCTION
+function deleteItem(itemID) {
+    // delete on backend
+    let url = "api.php?deleteEntry=" + itemID;
 
-    for (const button of markCompleteButtons) {
-        button.addEventListener('click', event => { //Event listener for paragraph on click
-            button.parentElement.parentElement.style.backgroundColor = "#01D27F";
+    fetch(url)
+        .then(function (data) {
+            // hide on front end
+            let item = document.querySelector(".item[data-item-id=\"" + itemID + "\"]");
+            item.style.display = "none";
+        })
+        .catch(function (error) {
+            console.log(error);
         });
-    }
 
-    for (const button of deleteItemButtons) {
-        button.addEventListener('click', event => { //Event listener for paragraph on click
-            button.parentElement.parentElement.classList.add("hidden");
-        });
-    }
-});
+    return true;
+}
 
 // *****
 // EDIT LIST FUNCTION
@@ -43,7 +44,7 @@ document.querySelector("#titleSubmit").addEventListener("click", function(){
     let oldTitle = document.querySelector(".titleHeader h2").textContent;
 
     // update with database -- ajax call to api
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.open("GET", "api.php?newTitle="+newTitle+"&oldTitle="+oldTitle, false);
     xhttp.send();
 
@@ -62,7 +63,7 @@ function privacySwap(listID){
     document.querySelector("#privatize ").classList.toggle("hidden");
     document.querySelector("#privatize-lock").classList.toggle("hidden");
 
-    var url = "api.php?privateSwap="+listID;
+    let url = "api.php?privateSwap="+listID;
 
     fetch(url)
         .then(function(data){
@@ -78,7 +79,7 @@ function privacySwap(listID){
 
 
 function confirmation(){
-    var result = confirm("Want to Delete List?");
+    let result = confirm("Want to Delete List?");
     if (!result){
         return false;
     }
@@ -101,7 +102,7 @@ document.querySelector("#descSubmit").addEventListener("click", function(){
     let oldDesc = document.querySelector(".bucketDesc p").textContent;
 
     // update with database -- ajax call to api
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.open("GET", "api.php?newDesc="+newDesc+"&oldDesc="+oldDesc, false);
     xhttp.send();
 

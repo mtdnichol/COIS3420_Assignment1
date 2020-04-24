@@ -36,14 +36,6 @@ $statement = $pdo->prepare($query);
 $statement->execute([$curID]);
 $results = $statement->fetchAll();
 
-if (isset($_POST['deleteItem'])) {
-    $pdo = connectDB();
-
-    $query = "DELETE FROM `bucket_entries` WHERE id=?";
-    $statement = $pdo->prepare($query);
-    $statement->execute([$_POST['dbid']]);
-}
-
 if (isset($_POST['exit'])) {
     header("Location: DisplayList");
     exit();
@@ -89,8 +81,6 @@ if(!isOwner($curID)) {
                     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
                         <button id="editList" name="editList" onclick="titleSwap(); return false;" data-tippy-content="Edit List Title"><i class="fas fa-edit"></i></button>
                     </form>
-                    <!--                Form to submit list id using get to profile page, allowing list to be deleted-->
-                    <!--                currently points to login since no profile page-->
                     <form action="./Login" method="POST">
                         <input type="hidden" name="listID" value="<?php echo $_GET['id'] ?>">
                         <button id="deleteList" name="deleteList" data-tippy-content="Delete List" onclick="return confirmation()"><i class="fas fa-trash-alt"></i></button>
@@ -110,22 +100,20 @@ if(!isOwner($curID)) {
         </div>
 
         <?php foreach ($results as $result): ?>
-            <form id="<?php echo $result['id']?>" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-                <input id="dbid" type="hidden" name="value" value="<?php $result['id'] ?>">
+            <input id="dbid" type="hidden" name="value">
 
-                <div class ="item">
-                    <div class="item-buttons">
-                        <button id="markItem" class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
-                        <button id="editItem" class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
-                        <button id="deleteItem" class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
-                    </div>
-                    <img src="<?= $result['photo'] ?>" alt="TestImage">
-                    <div class="bucket-content" id="<?= $result['id'] ?>">
-                        <h3><?= $result['title'] ?></h3>
-                        <p><?= $result['description'] ?></p>
-                    </div>
+            <div class="item" data-item-id="<?php echo $result['id'] ?>">
+                <div class="item-buttons">
+                    <button id="markItem" class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
+                    <button id="editItem" class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
+                    <button id="deleteItem" class="deleteItem" name="deleteItem" data-tippy-content="Delete Item" onclick="return deleteItem('<?php echo $result['id'] ?>');"><i class="fas fa-trash-alt"></i></button>
                 </div>
-            </form>
+                <img src="<?= $result['photo'] ?>" alt="TestImage">
+                <div class="bucket-content" id="<?= $result['id'] ?>">
+                    <h3><?= $result['title'] ?></h3>
+                    <p><?= $result['description'] ?></p>
+                </div>
+            </div>
         <?php endforeach; ?>
     </div>
     <script defer src="./scripts/ManageList.js"></script>
