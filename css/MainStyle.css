@@ -313,7 +313,7 @@ div.item p {
     background-color: rgba(238, 238, 238, 0.8);
     width: 100%;
     border: 0;
-    padding: 0px 10px;
+    padding: 0 1%;
     color: #171717;
 
     border-bottom: 1px solid #b3b3b3;
@@ -589,8 +589,6 @@ div.main-splash {
     color: black;
     letter-spacing: 2px;
     padding-top: 2%;
-
-    background-color: red;
 }
 
 

@@ -161,11 +161,6 @@ document.querySelector("#descSubmit").addEventListener("click", function(){
     document.querySelector(".bucketEdit").classList.toggle("hidden");
 });
 
-// add bucket list item
-document.querySelector("#addTaskSubmit").addEventListener("click", function(){
-
-});
-
 
 // ADD TASK FUNCTION
 // takes in listID, ensures users have entered items into new user+desc and then
@@ -233,6 +228,7 @@ function editTask(listID, taskID){
     // assuming both have been edited
     if (!failed){
         var url = "api.php?editTask="+listID;
+        console.log(taskID);
 
         // fetch with json data including taskID, taskName, taskDesc, and an identifier.
         fetch(url, {
