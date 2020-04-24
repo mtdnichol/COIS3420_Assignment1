@@ -60,6 +60,7 @@ if (isset($_POST['completeCreation'])) {
     $query="INSERT INTO `bucket_lists`(`title`, `fk_userid`, `created`, `description`, `private`) VALUES (?,?,?,?,?)";
     $statement = $pdo->prepare($query);
     $statement->execute([$_POST['title'], $_SESSION['userID'], $date, $_POST['description'], $private]);
+    header("Refresh:0");
 }
 ?>
 
@@ -145,4 +146,10 @@ if (isset($_POST['completeCreation'])) {
 
 
     </div>
+
+    <script>
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
+    </script>
 <?php include "./includes/footer.php"; ?>
