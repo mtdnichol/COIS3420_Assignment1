@@ -100,6 +100,9 @@ if (isset($_POST['submit'])) {
                     <p><?= $error ?></p>
                 <?php endforeach; ?>
             </form>
+            <a href="Login" id="backtoButton">
+                <button id="login" name="login" class="centered">Back to Login</button>
+            </a>
         </div>
     </div>
 </body>

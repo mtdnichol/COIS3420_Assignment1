@@ -59,7 +59,7 @@ if (isset($_POST['exit'])) {
                     </form>
                     <!--                Form to submit list id using get to profile page, allowing list to be deleted-->
                     <!--                currently points to login since no profile page-->
-                    <form action="./Login.php" method="POST">
+                    <form action="./Login" method="POST">
                         <input type="hidden" name="listID" value="<?php echo $_GET['id'] ?>">
                         <button id="deleteList" name="deleteList" data-tippy-content="Delete List" onclick="return confirmation()"><i class="fas fa-trash-alt"></i></button>
                     </form>
