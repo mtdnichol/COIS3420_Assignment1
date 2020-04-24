@@ -97,11 +97,13 @@ if (isset($_POST['submit'])) {
                     <label for="password-check"><i class="fas fa-lock"></i></label>
                 </div>
             </div>
-            <div class="row">
-                <button id="submit" name="submit" class="centered">Register</button>
+            <div class="centered-text">
                 <?php foreach ($errors as $error): ?>
                     <p><?= $error ?></p>
                 <?php endforeach; ?>
+            </div>
+            <div class="row">
+                <button id="submit" name="submit" class="centered">Register</button>
             </div>
         </form>
     </div>

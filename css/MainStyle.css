@@ -505,3 +505,7 @@ div.large {
 .no-margin {
     margin: 0 !important;
 }
+
+.centered-text {
+    text-align: center;
+}
