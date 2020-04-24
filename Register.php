@@ -18,8 +18,6 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
     $password_check = $_POST['password-check'];
 
-
-
     /* Connect to DB */
     $pdo = connectDB();
 
@@ -54,19 +52,6 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $username;
         $_SESSION['userID'] = $pdo->lastInsertId();
 
-//        $query = "SELECT id, username FROM `bucket_users` WHERE username = ?";
-//        $statement = $pdo->prepare($query);
-//        $statement->execute([ $username ]);
-//        $results = $statement->fetch();
-
-//        $_SESSION['username'] = $results['username'];
-//        $_SESSION['userID'] = $results['id'];
-
-        //Create default list for user
-//        $query = "INSERT INTO bucket_lists (title, fk_userid) VALUES ('Default List',?)";
-//        $statement = $pdo->prepare($query);
-//        $statement->execute([$_SESSION['userID']]);
-
         header("Location: Profile");
         exit();
     }
@@ -80,6 +65,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <title>Register</title>
     <link rel="stylesheet" href="css/MainStyle.css">
+    <link rel="stylesheet" href="./plugins/passwordStrength/pwdStyles.css">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Lato:300,400,700|Roboto:300,400,700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1c8ee6a0f5.js" crossorigin="anonymous"></script>
 </head>
@@ -101,7 +87,7 @@ if (isset($_POST['submit'])) {
                 <div class="box2">
                     <div>
                         <label for="password"><i class="fas fa-lock"></i></label>
-                        <input id="password" name="password" type="text" placeholder="Password">
+                        <input id="password" name="password" type="password" placeholder="Password">
                     </div>
                     <div>
                         <input id="password-check" name="password-check" type="text" placeholder="Re-type Password">
