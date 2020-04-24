@@ -60,7 +60,7 @@ $userLists = $statement->fetchAll();
     </div>
 
     <div class="user-buttons">
-        <a href="Login" id="logout">Logout</a>
+        <a href="Logout" id="logout">Logout</a>
         <a href="Profile">Profile</a>
     </div>
 </div>
