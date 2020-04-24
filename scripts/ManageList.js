@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     for (const button of deleteItemButtons) {
         button.addEventListener('click', event => { //Event listener for paragraph on click
-            button.parentElement.parentElement.remove();
+            button.parentElement.parentElement.classList.add("hidden");
         });
     }
 });

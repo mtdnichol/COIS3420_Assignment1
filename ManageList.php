@@ -36,7 +36,11 @@ $statement->execute([$curID]);
 $results = $statement->fetchAll();
 
 if (isset($_POST['deleteItem'])) {
-    echo $_POST['value'];
+    $pdo = connectDB();
+
+    $query = "DELETE FROM `bucket_entries` WHERE id=?";
+    $statement = $pdo->prepare($query);
+    $statement->execute([$_POST['dbid']]);
 }
 
 if (isset($_POST['exit'])) {
@@ -91,12 +95,12 @@ if(!isOwner($curID)) {
 
         <?php foreach ($results as $result): ?>
             <form id="item-form" action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-                <input type="hidden" name="value" value="<?php $result['id'] ?>">
+                <input id="dbid" type="hidden" name="value" value="<?php $result['id'] ?>">
                 <div class ="item">
                     <div class="item-buttons">
-                        <button class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
-                        <button class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
-                        <button class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
+                        <button id="markItem" class="markItem" name="markItem" data-tippy-content="Mark Completed"><i class="fas fa-check"></i></button>
+                        <button id="editItem" class="editItem" name="editItem" data-tippy-content="Edit Item"><i class="fas fa-edit"></i></button>
+                        <button id="deleteItem" class="deleteItem" name="deleteItem" data-tippy-content="Delete Item"><i class="fas fa-trash-alt"></i></button>
                     </div>
                     <img src="<?= $result['photo'] ?>" alt="TestImage">
                     <div class="bucket-content" value="<?= $result['id'] ?>">
@@ -109,4 +113,3 @@ if(!isOwner($curID)) {
     </div>
     <script defer src="./scripts/ManageList.js"></script>
 <?php include "./includes/footer.php"; ?>
-
