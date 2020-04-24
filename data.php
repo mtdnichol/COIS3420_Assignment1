@@ -64,3 +64,13 @@ function deleteEntry($entryID) {
 
     return true;
 }
+
+function editTask($taskID, $taskName, $taskDesc){
+    var_dump($taskID, $taskDesc, $taskName);
+    //get catagories from db
+    $query = "UPDATE bucket_entries SET title=?, description=? WHERE id = ?";
+    $statement = $GLOBALS['pdo']->prepare($query);
+    $statement->execute([$taskName, $taskDesc, $taskID]);
+
+    return true;
+}

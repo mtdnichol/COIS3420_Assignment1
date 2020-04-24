@@ -96,7 +96,7 @@ h3.profileFormat {
 }
 
 .bucket-content {
-    margin: 5px;
+    margin: 2%;
 }
 
 .bucket-list-nav {
@@ -625,7 +625,9 @@ div.main-splash {
     padding-right: 1em;
 }
 
-.addSubmit {
+
+
+.addSubmit, .editSubmit {
     height: 2.5vh;
     width: 20vw;
     text-align: center;
@@ -640,7 +642,11 @@ div.main-splash {
     color: black;
 }
 
-.addSubmit:hover{
+.editSubmit {
+    font-size: 1.5em !important;
+}
+
+.addSubmit:hover, .editSubmit:hover{
     box-shadow: inset 0 -200px 0 0 #000000;
     color: #fff;
     cursor: pointer;
@@ -652,7 +658,13 @@ div.main-splash {
     margin: auto 1vw;
 }
 
-#descEdit, #nameEdit, #title, #description{
+.editLabel {
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    margin: auto 1vw;
+}
+
+#descEdit, #nameEdit, #nameModify, #descModify, #title, #description{
     width: 60%;
 }
 
@@ -725,4 +737,27 @@ a.listLink:hover, a:active {
 
 form.wide {
     width: 100%;
+}
+
+.addLucky {
+    font-size: 4em;
+    padding-left: 5%;
+    padding-right: 5%;
+    transition: 0.5s;
+    color: #171717
+}
+
+.addLucky:hover {
+    cursor: pointer;
+    color: #5c6366;
+    transition: 0.5s;
+}
+
+.fa-magic:hover {
+    color: #252525;
+    transition: 0.5s;
+}
+
+.fa-magic {
+    transition: 0.5s;
 }
