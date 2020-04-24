@@ -31,17 +31,22 @@ if (isset($_POST['submit'])) {
         $valid = false;
     }
 
+    // if valid up to this point, continue on
     if ($valid) {
+        // hashing the password
         $options = ['cost' => 12];
         $password = password_hash($password, PASSWORD_DEFAULT, $options);
 
+        // resetting the password in the db
         $query = "UPDATE `bucket_users` SET `password`=? WHERE username=?";
         $statement = $pdo->prepare($query);
         $statement->execute([ $password, $username ]);
 
+        // setting session variables and logging them in
         $_SESSION['username'] = $username;
         $_SESSION['userID'] = $results['id'];
 
+        // redirecting back to pfoile
         header("Location: Profile");
         exit();
     }
@@ -84,6 +89,7 @@ if (isset($_POST['submit'])) {
                 </div>
 
                 <button id="submit" name="submit" class="centered">Submit</button>
+                <!-- print off any errors-->
                 <?php foreach ($errors as $error): ?>
                     <p><?= $error ?></p>
                 <?php endforeach; ?>
