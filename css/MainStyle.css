@@ -231,7 +231,7 @@ a.inline:visited {
 }
 
 button.createButton {
-    font-size: .6em;
+    font-size: 1em;
     margin: .3em;
 }
 
@@ -648,11 +648,11 @@ div.main-splash {
     margin: auto 1vw;
 }
 
-#descEdit, #nameEdit {
+#descEdit, #nameEdit, #title, #description{
     width: 60%;
 }
 
-#descEdit {
+#descEdit, #description{
     height: 30%;
 }
 
@@ -689,4 +689,29 @@ a.toButton:hover {
     background-color: var(--accent-color);
     color: white;
     transition: 0.3s;
+}
+
+
+a.listLink {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+a.listLink:visited {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+a.listLink:focus {
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+a.listLink:hover, a:active {
+    text-decoration: none;
+    color: #62749c;
+}
+
+form.wide {
+    width: 100%;
 }

@@ -17,7 +17,7 @@ $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
 $email = $statement->fetch();
 
-$query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ?";
+$query = "SELECT * FROM `bucket_lists` WHERE fk_userid = ? ORDER BY title";
 $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
 $lists = $statement->fetchAll();
@@ -78,7 +78,6 @@ if (isset($_POST['completeCreation'])) {
 
 <head>
     <script src="scripts/Profile.js"></script>
-    <link rel="stylesheet" href="css/createList.css">
 </head>
 <!-- HTML Starts -->
 <?php include "./includes/header.php"; ?>
@@ -96,17 +95,16 @@ if (isset($_POST['completeCreation'])) {
         <div class="bucketListNav">
             <button id="createList" data-open-modal="createListModal" name="createList" data-tippy-content="Create A List"><i class="fas fa-plus"></i></button>
             <div id="createListModal" class="modal">
-                <div class="modal-content login-box">
+                <div class="modal-content">
                     <span class="close-btn">&times;</span>
-
-                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST">
-                        <div>
-                            <label for="title"></i>List Title</label>
+                    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="wide">
+                        <div class="addModalContent">
+                            <label for="title" class="addLabel">Title</label>
                             <input id="title" name="title" type="text" placeholder="Title" required>
                         </div>
-                        <div>
-                            <label for="description"></i>List Description</label>
-                            <input id="description" name="description" type="text" placeholder="Description" required>
+                        <div class="addModalContent">
+                            <label for=description" class="addLabel">Description</label>
+                            <textarea name="description" id="description" cols="30" rows="10" required></textarea>
                         </div>
                         <div>
                             <label for="privacy"></i>Private</label>
@@ -117,6 +115,29 @@ if (isset($_POST['completeCreation'])) {
                     </form>
                 </div>
             </div>
+
+<!--            <div id="createListModal" class="modal">-->
+<!--                <div class="modal-content">-->
+<!--                    <span class="close-btn">&times;</span>-->
+<!---->
+<!--                    <form action="--><?//= $_SERVER['PHP_SELF'] ?><!--" method="POST">-->
+<!--                        <div>-->
+<!--                            <label for="title"></i>List Title</label>-->
+<!--                            <input id="title" name="title" type="text" placeholder="Title" required>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="description"></i>List Description</label>-->
+<!--                            <input id="description" name="description" type="text" placeholder="Description" required>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="privacy"></i>Private</label>-->
+<!--                            <input id="privacy" name="privacy" type="checkbox">-->
+<!--                        </div>-->
+<!---->
+<!--                        <button id="completeCreation" name="completeCreation" class="centered createButton">Submit</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
         <table class="profile">
@@ -140,7 +161,7 @@ if (isset($_POST['completeCreation'])) {
 
                     <td><?= $list['description'] ?></td>
                     <td><?= $list['created'] ?></td>
-                    <td><a href="<?php
+                    <td><a class="listLink" href="<?php
                         $currPath = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                         echo substr($currPath, 0, strrpos($currPath, '/')) . "/DisplayList?id=" . $list['id'];
                         ?>"><?php
