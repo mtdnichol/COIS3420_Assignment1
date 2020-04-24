@@ -23,12 +23,13 @@ $statement = $pdo->prepare($query);
 $statement->execute([$_SESSION['userID']]);
 $userLists = $statement->fetchAll();
 
-$query = "SELECT title, username FROM `bucket_lists` INNER JOIN bucket_users ON bucket_lists.fk_userid = bucket_users.id WHERE bucket_lists.id = ?";
+$query = "SELECT title, username, description FROM `bucket_lists` INNER JOIN bucket_users ON bucket_lists.fk_userid = bucket_users.id WHERE bucket_lists.id = ?";
 $statement = $pdo->prepare($query);
 $statement->execute([$curID]);
 $list = $statement->fetch();
 $username = $list['username'];
 $title = $list['title'];
+$description = $list['description'];
 
 $query = "SELECT id, title, photo, description FROM `bucket_entries` WHERE fk_listid = ?";
 $statement = $pdo->prepare($query);
@@ -57,7 +58,7 @@ if(!isOwner($curID)) {
 <!--html file starts-->
 <?php include "./includes/header.php"; ?>
     <div class="main-box">
-        <h1><?php echo $username ?>'s Bucket List</h1>
+        <h1><?php echo ucfirst($username) ?>'s Bucket List</h1>
         <div class="titleHeader">
             <h2><?php echo $title ?></h2>
         </div>
@@ -65,6 +66,15 @@ if(!isOwner($curID)) {
             <input type="text">
             <button id="titleSubmit">Submit</button>
         </div>
+
+        <div class="bucketDesc">
+            <p id="bucketDescription"><?php echo $description ?></p>
+        </div>
+        <div class="bucketEdit hidden">
+            <input type="text">
+            <button id="descSubmit">Submit</button>
+        </div>
+
 
         <div class="bucketListNav" style="">
             <div class="leftButtons">

@@ -599,3 +599,15 @@ div.main-splash {
 .headerBG h4 {
     letter-spacing: 2px;
 }
+
+#bucketDescription {
+    transition: 1s;
+}
+
+#bucketDescription:hover {
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: 1s;
+    text-decoration: underline;
+}
+

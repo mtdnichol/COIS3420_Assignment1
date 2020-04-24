@@ -20,3 +20,16 @@ if(!empty($_GET['privateSwap'])){
         response(200, "Privacy Swapped", NULL);
     }
 }
+
+//description swap route
+
+// Rename list route
+if(!empty($_GET['newDesc']) && !empty($_GET['oldDesc'])){
+    // store listID passed in with deleteList
+    $newDesc=$_GET['newDesc'];
+    $oldDesc=$_GET['oldDesc'];
+
+    if (descUpdate($oldDesc, $newDesc)){
+        response(200, "Description Updated", NULL);
+    }
+}
