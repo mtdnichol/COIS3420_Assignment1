@@ -6,11 +6,11 @@ Created by Jared Mezzatesta, Michael Nichol, and Bobby Horth
 Home Page
 ![Home Page](https://i.imgur.com/VkskilT.png)
 
-Login
+// Login
 ![Login](https://i.imgur.com/hbRxNVE.png)
 
-Bucket List
+// Bucket List
 ![Bucket List](https://i.imgur.com/HkQDSZd.png)
 
-New Item
+// New Item
 ![New Item](https://i.imgur.com/KVJkqmL.png)
